@@ -1,21 +1,21 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, MapPin, Phone, Instagram, Facebook, Globe } from "lucide-react";
+import { Mail, MapPin, Phone, Instagram, Facebook, Globe, ShieldCheck } from "lucide-react";
 import { SERVICES, SERVICE_AREAS, SITE } from "@/lib/site";
+import paymentsStrip from "@/assets/payments-strip.png";
 
 export function Footer() {
   return (
     <footer className="bg-navy text-navy-foreground mt-24 pb-24 md:pb-0">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 grid gap-10 md:grid-cols-4">
         <div className="md:col-span-1">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="h-10 w-10 rounded-md bg-gradient-steel flex items-center justify-center font-display font-bold">PS</div>
-            <div>
-              <div className="font-display font-bold">PS Steels</div>
-              <div className="text-xs text-white/60">& Engineering</div>
+          <div className="leading-tight mb-4">
+            <div className="font-display font-bold text-lg">PS Steels</div>
+            <div className="text-[11px] uppercase tracking-[0.18em] text-orange font-semibold mt-0.5">
+              & Engineering
             </div>
           </div>
           <p className="text-sm text-white/70 leading-relaxed">
-            Complete SS & MS steel fabrication, GP pipe & steel pipe works across Kerala. Free consultation, site visit and quotation.
+            Complete SS and MS steel fabrication, GP pipe and steel pipe works across Kerala. Free consultation, site visit and quotation.
           </p>
           <div className="flex gap-3 mt-5">
             <a href={SITE.socials.instagram} aria-label="Instagram" target="_blank" rel="noreferrer" className="h-9 w-9 rounded-md bg-white/10 hover:bg-orange hover:text-orange-foreground flex items-center justify-center transition">
@@ -60,15 +60,39 @@ export function Footer() {
             <li className="flex gap-3"><Mail className="h-4 w-4 mt-0.5 shrink-0 text-orange" />
               <a href={`mailto:${SITE.email}`} className="hover:text-white">{SITE.email}</a>
             </li>
+            <li className="flex gap-3"><ShieldCheck className="h-4 w-4 mt-0.5 shrink-0 text-orange" />
+              <span>GSTIN: <span className="text-white font-medium tracking-wide">{SITE.gstin}</span></span>
+            </li>
           </ul>
           <p className="mt-4 text-xs text-white/50">{SITE.hours}</p>
+        </div>
+      </div>
+
+      {/* Payment methods strip */}
+      <div className="border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex flex-col items-center gap-4">
+            <div className="text-xs uppercase tracking-[0.18em] text-white/60 font-semibold">
+              We accept all major payments
+            </div>
+            <div className="w-full max-w-3xl bg-white rounded-2xl p-4 sm:p-5 shadow-elegant">
+              <img
+                src={paymentsStrip}
+                alt="Accepted payment methods: Paytm, Google Pay, UPI, COD, PhonePe, Amazon Pay, Net Banking, Visa, RuPay, Mastercard, American Express"
+                loading="lazy"
+                width={1536}
+                height={1024}
+                className="w-full h-auto object-contain"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row gap-2 items-center justify-between text-xs text-white/50">
           <p>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
-          <p>Mannarkkad · Palakkad · Kerala</p>
+          <p>GSTIN: {SITE.gstin} · Mannarkkad, Palakkad, Kerala</p>
         </div>
       </div>
     </footer>
