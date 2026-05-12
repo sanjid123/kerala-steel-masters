@@ -68,23 +68,21 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Payment methods strip */}
+      {/* Payment methods strip - compact */}
       <div className="border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex flex-col items-center gap-4">
-            <div className="text-xs uppercase tracking-[0.18em] text-white/60 font-semibold">
-              We accept all major payments
-            </div>
-            <div className="w-full max-w-3xl bg-white rounded-2xl p-4 sm:p-5 shadow-elegant">
-              <img
-                src={paymentsStrip}
-                alt="Accepted payment methods: Paytm, Google Pay, UPI, COD, PhonePe, Amazon Pay, Net Banking, Visa, RuPay, Mastercard, American Express"
-                loading="lazy"
-                width={1536}
-                height={1024}
-                className="w-full h-auto object-contain"
-              />
-            </div>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="text-[11px] uppercase tracking-[0.18em] text-white/50 font-semibold shrink-0">
+            We accept
+          </div>
+          <div className="bg-white/95 rounded-lg px-3 py-2 max-w-full">
+            <img
+              src={paymentsStrip}
+              alt="Accepted payments: Paytm, Google Pay, UPI, COD, PhonePe, Amazon Pay, Net Banking, Visa, RuPay, Mastercard, Amex"
+              loading="lazy"
+              width={1536}
+              height={1024}
+              className="h-10 sm:h-12 w-auto object-contain"
+            />
           </div>
         </div>
       </div>
