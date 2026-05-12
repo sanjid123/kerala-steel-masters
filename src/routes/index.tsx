@@ -54,7 +54,7 @@ export const Route = createFileRoute("/")({
 const MATERIALS = [
   { name: "SS Steel", desc: "Grade 304 / 316 stainless steel" },
   { name: "MS Steel", desc: "Mild steel for heavy structures" },
-  { name: "GP Pipe", desc: "Galvanized pipe — long-lasting" },
+  { name: "GP Pipe", desc: "Galvanized pipe, long-lasting" },
   { name: "Steel Pipe", desc: "Round & square steel pipes" },
 ];
 
@@ -70,7 +70,7 @@ const VALUES = [
   { icon: Wrench, title: "Custom Fabrication", desc: "Built exactly to your design, size and site." },
   { icon: ShieldCheck, title: "Quality Finishing", desc: "Precision welding, polishing & powder coating." },
   { icon: Truck, title: "On-Time Delivery", desc: "Promised timelines, honored every time." },
-  { icon: Factory, title: "Kerala-wide Service", desc: "Workshops in Mannarkkad — projects across Kerala." },
+  { icon: Factory, title: "Kerala-wide Service", desc: "Workshops in Mannarkkad, projects across Kerala." },
 ];
 
 function Home() {
@@ -99,7 +99,7 @@ function Home() {
               <br className="hidden sm:block" /> Fabrication Across Kerala
             </h1>
             <p className="mt-5 text-base sm:text-lg text-white/75 max-w-2xl leading-relaxed">
-              Custom fabrication and steel works in SS Steel, MS Steel, GP Pipe and Steel Pipe — designed and manufactured to your exact requirement with quality finishing and durable materials.
+              Custom fabrication and steel works in SS Steel, MS Steel, GP Pipe and Steel Pipe, designed and manufactured to your exact requirement with quality finishing and durable materials.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -143,10 +143,10 @@ function Home() {
         <SectionHeading
           eyebrow="What we do"
           title="Steel fabrication services for every need"
-          description="From SS handrails and gates to commercial kitchens, catering counters and wedding stage frames — we cover every major fabrication category."
+          description="From SS handrails and gates to commercial kitchens, catering counters and wedding stage frames, we cover every major fabrication category."
         />
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {SERVICES.map((s, i) => (
+          {SERVICES.map((s) => (
             <Link
               key={s.id}
               to="/services"
@@ -154,9 +154,7 @@ function Home() {
               className="group block bg-card border border-border rounded-2xl p-6 hover:border-steel hover:shadow-card transition"
             >
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-md bg-navy/5 text-navy flex items-center justify-center font-display font-bold">
-                  {String(i + 1).padStart(2, "0")}
-                </div>
+                <div className="h-2.5 w-2.5 rounded-full bg-steel shrink-0" />
                 <h3 className="font-display font-bold text-lg text-navy">{s.title}</h3>
               </div>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{s.short}</p>
@@ -227,20 +225,17 @@ function Home() {
             </div>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold">From idea to installation, in 5 simple steps</h2>
           </div>
-          <ol className="mt-12 grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
-            {PROCESS.map((step, i) => (
-              <li key={step.title} className="bg-white/5 border border-white/10 rounded-2xl p-5">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-md bg-orange text-orange-foreground flex items-center justify-center font-display font-bold">
-                    {i + 1}
-                  </div>
-                  <step.icon className="h-5 w-5 text-white/70" />
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
+            {PROCESS.map((step) => (
+              <div key={step.title} className="bg-white/[0.04] border border-white/10 rounded-2xl p-6 hover:bg-white/[0.07] transition">
+                <div className="h-11 w-11 rounded-xl border border-white/15 bg-white/5 flex items-center justify-center text-orange">
+                  <step.icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-4 font-display font-bold">{step.title}</h3>
-                <p className="mt-1.5 text-sm text-white/70">{step.desc}</p>
-              </li>
+                <h3 className="mt-5 font-display font-bold text-lg text-white">{step.title}</h3>
+                <p className="mt-2 text-sm text-white/65 leading-relaxed">{step.desc}</p>
+              </div>
             ))}
-          </ol>
+          </div>
         </div>
       </section>
 
@@ -264,7 +259,7 @@ function Home() {
           <SectionHeading
             eyebrow="Service areas"
             title="Steel fabrication across all of Kerala"
-            description="Based in Vattambalam, Mannarkkad — we deliver and install across every major district in Kerala."
+            description="Based in Vattambalam, Mannarkkad, we deliver and install across every major district in Kerala."
           />
           <div className="mt-8 flex flex-wrap gap-2">
             {SERVICE_AREAS.map((c) => (

@@ -24,26 +24,62 @@ import a8 from "@/assets/avatar-8.jpg";
 export const SITE = {
   name: "PS Steels & Engineering",
   short: "PS Steels",
-  tagline: "Complete SS & MS Steel Fabrication Across Kerala",
+  tagline: "Complete SS and MS Steel Fabrication Across Kerala",
   description:
-    "PS Steels & Engineering, Mannarkkad — custom SS & MS steel fabrication, GP pipe & steel pipe works, handrails, gates, hotel & bakery fabrication and catering counters across Kerala.",
+    "PS Steels and Engineering, Mannarkkad. Custom SS and MS steel fabrication, GP pipe and steel pipe works, handrails, gates, hotel and bakery fabrication and catering counters across Kerala.",
   address: {
     line1: "Vattambalam, Mannarkkad",
     region: "Palakkad, Kerala, India",
     postal: "678582",
   },
+  gstin: "32EGQPP3743B1ZF",
   // Note: brief listed +91 974751022 (only 9 digits). Assuming +91 97475 10220.
   phoneDisplay: "+91 97475 10220",
   phoneTel: "+919747510220",
   whatsappNumber: "919747510220",
   email: "info@pssteels.in",
-  hours: "Mon – Sat · 8:30 AM – 7:30 PM",
+  hours: "Mon to Sat, 8:30 AM to 7:30 PM",
   socials: {
     google: "https://www.google.com/maps?q=Vattambalam+Mannarkkad",
     instagram: "https://instagram.com/pssteels",
     facebook: "https://facebook.com/pssteels",
   },
 };
+
+export const FAQS = [
+  {
+    q: "Which areas in Kerala do you serve for steel fabrication?",
+    a: "We are based in Vattambalam, Mannarkkad and undertake SS, MS, GP pipe and steel pipe fabrication projects across all of Kerala including Palakkad, Ottapalam, Perinthalmanna, Malappuram, Manjeri, Kozhikode, Thrissur, Ernakulam, Kollam and Thiruvananthapuram.",
+  },
+  {
+    q: "What materials do you work with?",
+    a: "We work with stainless steel (Grade 304 and 316), mild steel (MS), GP (galvanized) pipe and steel pipe in round and square sections. We choose the right material based on your project, budget and durability requirement.",
+  },
+  {
+    q: "Is the site visit and quotation really free?",
+    a: "Yes. Free consultation, free site visit and free quotation are part of our standard process. Just send a WhatsApp message or call us with your location and requirement.",
+  },
+  {
+    q: "How long does it take to receive a quotation?",
+    a: "After the site visit, we typically share a transparent quotation within 24 to 48 hours. Larger or fully custom projects may take a little longer for accurate pricing.",
+  },
+  {
+    q: "Do you offer warranty and finishing on fabrication work?",
+    a: "Yes. All works carry a workmanship guarantee. We use precision MIG and TIG welding, mirror or matte polishing for SS, and powder coating or painting for MS as per your requirement.",
+  },
+  {
+    q: "What is the difference between GP pipe and SS pipe works?",
+    a: "GP pipe (galvanized iron) is cost effective and great for handrails, gates and roofing structures. SS pipe is corrosion resistant, ideal for kitchens, hotels, bakeries, balconies and high finish railings. We will recommend the right option for your use case.",
+  },
+  {
+    q: "Can you fabricate based on my own design or drawing?",
+    a: "Absolutely. We do 100 percent custom fabrication based on your design, site measurement, size and requirement, whether it is residential, commercial or industrial.",
+  },
+  {
+    q: "What payment methods do you accept?",
+    a: "We accept all major payment methods including UPI, Google Pay, PhonePe, Paytm, Amazon Pay, Net Banking, Visa, RuPay, Mastercard, American Express and Cash on Delivery.",
+  },
+];
 
 export function waLink(message: string) {
   return `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(message)}`;
@@ -178,7 +214,7 @@ export const SERVICES: Service[] = [
     id: "steel-furniture",
     title: "Steel Furniture Works",
     short:
-      "Customized steel furniture — tables, chairs, racks, storage units and commercial furniture.",
+      "Customized steel furniture, tables, chairs, racks, storage units and commercial furniture.",
     bullets: [
       "Tables & chairs",
       "Racks & storage units",
@@ -190,7 +226,7 @@ export const SERVICES: Service[] = [
     id: "custom-fabrication",
     title: "Custom Fabrication on Demand",
     short:
-      "Made-to-order fabrication based on your design, size and site requirement — residential or commercial.",
+      "Made-to-order fabrication based on your design, size and site requirement, residential or commercial.",
     bullets: [
       "Free consultation & site visit",
       "Design & sample approval",
@@ -209,14 +245,14 @@ export type Project = {
 };
 
 export const PROJECTS: Project[] = [
-  { id: "p1", title: "Curved SS Handrail – Private Villa", category: "Handrails", image: handrail,
+  { id: "p1", title: "Curved SS Handrail, Private Villa", category: "Handrails", image: handrail,
     description: "Polished Grade 304 stainless steel handrail with seamless curves for a luxury residential staircase." },
   { id: "p2", title: "Designer MS Sliding Gate", category: "Gates", image: gate,
     description: "Powder-coated MS sliding gate with geometric pattern, fabricated and installed in Mannarkkad." },
   { id: "p3", title: "Heavy Duty Main Gate", category: "Gates", image: mainGate,
     description: "Robust MS swing gate with grill design for a residential compound." },
   { id: "p4", title: "Glass Balcony Railing", category: "Handrails", image: balcony,
-    description: "SS posts with toughened glass infill — apartment project in Kozhikode." },
+    description: "SS posts with toughened glass infill, apartment project in Kozhikode." },
   { id: "p5", title: "Hotel Commercial Kitchen", category: "Hotel & Bakery", image: hotel,
     description: "End-to-end SS kitchen counters, shelving and exhaust hoods for a hotel in Palakkad." },
   { id: "p6", title: "Bakery Display Counter", category: "Hotel & Bakery", image: bakery,
@@ -250,7 +286,7 @@ export const TESTIMONIALS: Testimonial[] = [
   { name: "Mohanan Nair", location: "Ottapalam", work: "Hotel Kitchen", rating: 5, avatar: a3,
     quote: "From design to installation, fully professional. Our entire commercial kitchen is by PS Steels. Very durable work." },
   { name: "Anand Krishnan", location: "Perinthalmanna", work: "Bakery Display", rating: 5, avatar: a4,
-    quote: "Bakery counter and shelving are perfect. Free consultation and quote — they understood exactly what we needed for our outlet." },
+    quote: "Bakery counter and shelving are perfect. Free consultation and quote, they understood exactly what we needed for our outlet." },
   { name: "Lakshmi Pillai", location: "Thrissur", work: "Balcony Railing", rating: 5, avatar: a5,
     quote: "Beautiful glass and SS balcony railing for our home. Clean job, no scratches, very neat installation." },
   { name: "Vipin Raj", location: "Kozhikode", work: "Architect", rating: 5, avatar: a6,

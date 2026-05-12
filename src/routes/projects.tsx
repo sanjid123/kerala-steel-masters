@@ -7,9 +7,9 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/projects")({
   head: () => {
-    const title = "Projects | Steel Fabrication Portfolio — PS Steels Kerala";
+    const title = "Projects | Steel Fabrication Portfolio, PS Steels Kerala";
     const description =
-      "Browse PS Steels' fabrication portfolio across Kerala — SS handrails, MS gates, hotel kitchens, bakery counters, catering counters, wedding stage works, steel furniture and pipe bending projects.";
+      "Browse PS Steels' fabrication portfolio across Kerala, SS handrails, MS gates, hotel kitchens, bakery counters, catering counters, wedding stage works, steel furniture and pipe bending projects.";
     return {
       meta: [
         { title },
@@ -36,7 +36,7 @@ function ProjectsPage() {
           <div className="text-xs font-semibold uppercase tracking-[0.18em] text-orange">Our work</div>
           <h1 className="mt-3 font-display text-4xl sm:text-5xl lg:text-6xl font-bold">Projects across Kerala</h1>
           <p className="mt-4 text-white/70 max-w-2xl">
-            A selection of recently delivered fabrication work — from luxury home handrails to commercial hotel kitchens.
+            A selection of recently delivered fabrication work, from luxury home handrails to commercial hotel kitchens.
           </p>
         </div>
       </section>

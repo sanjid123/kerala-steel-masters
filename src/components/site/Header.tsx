@@ -20,12 +20,13 @@ export function Header() {
     <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="h-9 w-9 rounded-md bg-gradient-steel flex items-center justify-center font-display font-bold text-white shadow-card">
-            PS
-          </div>
           <div className="leading-tight">
-            <div className="font-display font-bold text-sm sm:text-base text-navy">PS Steels</div>
-            <div className="text-[10px] sm:text-xs text-muted-foreground -mt-0.5">& Engineering</div>
+            <div className="font-display font-bold text-base sm:text-lg text-navy tracking-tight">
+              PS Steels
+            </div>
+            <div className="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-steel -mt-0.5 font-semibold">
+              & Engineering
+            </div>
           </div>
         </Link>
 
