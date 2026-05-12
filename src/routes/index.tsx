@@ -5,46 +5,32 @@ import {
   Sparkles, FileText, Hammer, Factory,
 } from "lucide-react";
 import heroImg from "@/assets/hero-workshop.jpg";
-import ogImage from "@/assets/og-image.jpg";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { CtaBand } from "@/components/site/CtaBand";
 import { TestimonialMarquee } from "@/components/site/TestimonialMarquee";
 import { PROJECTS, SERVICE_AREAS, SERVICES, SITE, waLink } from "@/lib/site";
+import { canonical, faqLd, localBusinessLd, OG_IMAGE, absUrl } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   head: () => {
-    const title = "PS Steels & Engineering | SS, MS, GP Pipe Fabrication in Kerala";
+    const title = "PS Steels & Engineering | SS, MS & GP Pipe Fabrication, Kerala";
     const description =
-      "Custom SS & MS steel fabrication, GP pipe & steel pipe works, handrails, gates, hotel & bakery fabrication and catering counters across Kerala. Free consultation, site visit & quotation.";
-    const ld = {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      name: SITE.name,
-      image: ogImage,
-      telephone: SITE.phoneTel,
-      email: SITE.email,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: SITE.address.line1,
-        addressLocality: "Mannarkkad",
-        addressRegion: "Kerala",
-        postalCode: SITE.address.postal,
-        addressCountry: "IN",
-      },
-      areaServed: SERVICE_AREAS.map((a) => ({ "@type": "City", name: a })),
-      url: "/",
-      priceRange: "₹₹",
-      openingHours: "Mo-Sa 08:30-19:30",
-    };
+      "Custom SS, MS, GP pipe and steel pipe fabrication in Kerala. Handrails, gates, hotel and bakery counters. Free site visit and quote across Mannarkkad, Palakkad, Kozhikode, Thrissur.";
     return {
       meta: [
         { title },
         { name: "description", content: description },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
+        { property: "og:url", content: absUrl("/") },
+        { property: "og:image", content: OG_IMAGE },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
       ],
+      links: [canonical("/")],
       scripts: [
-        { type: "application/ld+json", children: JSON.stringify(ld) },
+        { type: "application/ld+json", children: JSON.stringify(localBusinessLd()) },
+        { type: "application/ld+json", children: JSON.stringify(faqLd()) },
       ],
     };
   },

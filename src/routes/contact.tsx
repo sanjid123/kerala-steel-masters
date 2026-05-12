@@ -2,18 +2,52 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Mail, MapPin, MessageCircle, Phone, Clock } from "lucide-react";
 import { SITE, waLink } from "@/lib/site";
+import { canonical, breadcrumbLd, absUrl, OG_IMAGE, SITE_URL } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
   head: () => {
-    const title = "Contact PS Steels & Engineering | Mannarkkad Kerala";
+    const title = "Contact PS Steels — Steel Fabrication Quote Mannarkkad Kerala";
     const description =
-      "Contact PS Steels & Engineering for steel fabrication in Kerala. Call +91 97475 10220, WhatsApp or email info@pssteels.in. Free consultation, site visit and quotation.";
+      "Call +91 97475 10220 or WhatsApp PS Steels & Engineering for a free site visit and quotation across Kerala. Email info@pssteels.in. Mon–Sat, 8:30 AM–7:30 PM.";
+    const contactLd = {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      url: absUrl("/contact"),
+      mainEntity: {
+        "@type": "Organization",
+        name: SITE.name,
+        url: SITE_URL,
+        contactPoint: {
+          "@type": "ContactPoint",
+          telephone: SITE.phoneTel,
+          contactType: "customer service",
+          email: SITE.email,
+          areaServed: "IN",
+          availableLanguage: ["en", "ml", "hi"],
+        },
+      },
+    };
     return {
       meta: [
         { title },
         { name: "description", content: description },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
+        { property: "og:url", content: absUrl("/contact") },
+        { property: "og:image", content: OG_IMAGE },
+      ],
+      links: [canonical("/contact")],
+      scripts: [
+        { type: "application/ld+json", children: JSON.stringify(contactLd) },
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(
+            breadcrumbLd([
+              { name: "Home", path: "/" },
+              { name: "Contact", path: "/contact" },
+            ]),
+          ),
+        },
       ],
     };
   },

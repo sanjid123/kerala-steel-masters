@@ -4,18 +4,34 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { PROJECTS } from "@/lib/site";
 import { CtaBand } from "@/components/site/CtaBand";
 import { cn } from "@/lib/utils";
+import { canonical, projectsLd, breadcrumbLd, absUrl, OG_IMAGE } from "@/lib/seo";
 
 export const Route = createFileRoute("/projects")({
   head: () => {
-    const title = "Projects | Steel Fabrication Portfolio, PS Steels Kerala";
+    const title = "Steel Fabrication Projects in Kerala | PS Steels Portfolio";
     const description =
-      "Browse PS Steels' fabrication portfolio across Kerala, SS handrails, MS gates, hotel kitchens, bakery counters, catering counters, wedding stage works, steel furniture and pipe bending projects.";
+      "Recent SS handrails, MS gates, hotel kitchens, bakery counters, catering counters, wedding stage works, steel furniture and pipe bending projects delivered across Kerala.";
     return {
       meta: [
         { title },
         { name: "description", content: description },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
+        { property: "og:url", content: absUrl("/projects") },
+        { property: "og:image", content: OG_IMAGE },
+      ],
+      links: [canonical("/projects")],
+      scripts: [
+        { type: "application/ld+json", children: JSON.stringify(projectsLd()) },
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(
+            breadcrumbLd([
+              { name: "Home", path: "/" },
+              { name: "Projects", path: "/projects" },
+            ]),
+          ),
+        },
       ],
     };
   },

@@ -53,21 +53,14 @@ function citiesFor(i: number) {
   return out;
 }
 
+import { canonical, faqLd, servicesLd, breadcrumbLd, absUrl, OG_IMAGE } from "@/lib/seo";
+
 export const Route = createFileRoute("/services")({
   head: () => {
     const title =
-      "GP Pipe Works Kerala | SS & MS Fabrication Mannarkkad Palakkad | PS Steels";
+      "Steel Fabrication Services Kerala — SS, MS & GP Pipe Works | PS Steels";
     const description =
-      "Complete steel fabrication services in Kerala. SS and MS fabrication, GP pipe and steel pipe works, handrails, gates, hotel and bakery fabrication, catering counters, wedding stage works, sheet and pipe bending, steel furniture and custom fabrication. Free site visit and quotation across Mannarkkad, Palakkad, Malappuram, Kozhikode, Thrissur, Ernakulam.";
-    const faqLd = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: FAQS.map((f) => ({
-        "@type": "Question",
-        name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
-      })),
-    };
+      "GP pipe works, SS & MS fabrication, handrails, gates, hotel & bakery counters, catering counters, wedding stage steel and custom fabrication across Kerala. Free site visit & quote.";
     return {
       meta: [
         { title },
@@ -79,9 +72,22 @@ export const Route = createFileRoute("/services")({
         },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
+        { property: "og:url", content: absUrl("/services") },
+        { property: "og:image", content: OG_IMAGE },
       ],
+      links: [canonical("/services")],
       scripts: [
-        { type: "application/ld+json", children: JSON.stringify(faqLd) },
+        { type: "application/ld+json", children: JSON.stringify(faqLd()) },
+        { type: "application/ld+json", children: JSON.stringify(servicesLd()) },
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(
+            breadcrumbLd([
+              { name: "Home", path: "/" },
+              { name: "Services", path: "/services" },
+            ]),
+          ),
+        },
       ],
     };
   },
