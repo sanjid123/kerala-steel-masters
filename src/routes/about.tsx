@@ -75,7 +75,7 @@ function AboutPage() {
               "Delivery and installation across Kerala",
             ].map((p) => (
               <li key={p} className="flex items-start gap-2 text-sm">
-                <CheckCircle2 className="h-4.5 w-4.5 text-steel mt-0.5 shrink-0" />
+                <CheckCircle2 className="h-4 w-4 text-steel mt-0.5 shrink-0" />
                 <span>{p}</span>
               </li>
             ))}

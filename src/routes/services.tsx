@@ -87,7 +87,7 @@ function ServicesPage() {
                 <ul className="mt-6 grid sm:grid-cols-2 gap-2.5">
                   {s.bullets.map((b) => (
                     <li key={b} className="flex items-start gap-2 text-sm">
-                      <CheckCircle2 className="h-4.5 w-4.5 text-steel mt-0.5 shrink-0" />
+                      <CheckCircle2 className="h-4 w-4 text-steel mt-0.5 shrink-0" />
                       <span>{b}</span>
                     </li>
                   ))}
