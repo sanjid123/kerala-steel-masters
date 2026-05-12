@@ -11,6 +11,8 @@ import wedding from "@/assets/project-wedding.jpg";
 import furniture from "@/assets/project-furniture.jpg";
 import pipeBending from "@/assets/project-pipe-bending.jpg";
 import sitout from "@/assets/project-sitout.jpg";
+import workshop from "@/assets/hero-workshop.jpg";
+import gpPipe from "@/assets/project-gp-pipe.jpg";
 
 import a1 from "@/assets/avatar-1.jpg";
 import a2 from "@/assets/avatar-2.jpg";
