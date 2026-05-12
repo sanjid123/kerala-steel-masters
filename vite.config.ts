@@ -31,9 +31,7 @@ export default defineConfig({
       },
       maskPath: "/",
     },
-    sitemap: {
-      enabled: true,
-      host: "https://pssteels.in",
-    },
+    // We ship a hand-curated public/sitemap.xml instead — auto-generation
+    // includes hash anchors and skips "/" which hurts SEO.
   },
 });
