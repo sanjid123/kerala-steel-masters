@@ -151,29 +151,15 @@ function Home() {
               key={s.id}
               to="/services"
               hash={s.id}
-              className="group relative block overflow-hidden bg-card border border-border rounded-2xl p-6 hover:border-steel hover:shadow-card hover:-translate-y-1 transition-all duration-300"
+              className="group block bg-card border border-border rounded-2xl p-6 hover:border-steel hover:shadow-card transition"
             >
-              {s.image && (
-                <>
-                  <img
-                    src={s.image}
-                    alt=""
-                    aria-hidden="true"
-                    loading="lazy"
-                    className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.07] grayscale group-hover:opacity-[0.14] transition-opacity duration-300"
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-card via-card/85 to-card/60" />
-                </>
-              )}
-              <div className="relative z-10">
-                <div className="flex items-center gap-3">
-                  <div className="h-2.5 w-2.5 rounded-full bg-orange shrink-0" />
-                  <h3 className="font-display font-bold text-lg text-navy">{s.title}</h3>
-                </div>
-                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{s.short}</p>
-                <div className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-steel group-hover:gap-2 group-hover:text-orange transition-all">
-                  View details <ArrowRight className="h-4 w-4" />
-                </div>
+              <div className="flex items-center gap-3">
+                <div className="h-2.5 w-2.5 rounded-full bg-steel shrink-0" />
+                <h3 className="font-display font-bold text-lg text-navy">{s.title}</h3>
+              </div>
+              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{s.short}</p>
+              <div className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-steel group-hover:gap-2 transition-all">
+                View details <ArrowRight className="h-4 w-4" />
               </div>
             </Link>
           ))}
