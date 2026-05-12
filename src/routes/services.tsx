@@ -110,7 +110,6 @@ function ServicesPage() {
         })}
       </div>
 
-      <SectionHeading title="" eyebrow="" align="center" className="hidden" />
       <CtaBand title="Got a different requirement?" subtitle="We do custom fabrication on demand. Message us your idea — we'll handle the rest." />
     </>
   );
