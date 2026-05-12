@@ -23,8 +23,8 @@ export const Route = createFileRoute("/about")({
 });
 
 const STATS = [
-  { icon: Factory, k: "10+", v: "Years experience" },
-  { icon: Hammer, k: "500+", v: "Projects delivered" },
+  { icon: Factory, k: "15+", v: "Years experience" },
+  { icon: Hammer, k: "1000+", v: "Projects delivered" },
   { icon: Users, k: "100%", v: "Custom-built" },
 ];
 
