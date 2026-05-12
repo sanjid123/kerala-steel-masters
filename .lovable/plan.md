@@ -1,22 +1,44 @@
-## Why the logo looks like it has a white border
+## Goal
+Refine the service cards (homepage "What we do" grid) with a subtle, low-opacity background image relevant to each service so they feel modern and visually attractive — text stays primary.
 
-The current `src/assets/ps-steels-logo.png` is saved as **RGB (no alpha channel) with a solid white background** (corner pixels are `(255,255,255)`). So even though we call it "transparent," the browser is rendering an opaque white rectangle behind the artwork — that is the "white border" you see in the navbar (especially against the slightly translucent/blurred background while scrolling) and the white chip in the footer.
+Selected direction: **v1 — Light · Subtle Image** (white card, ~5% opacity grayscale background image, brightens to ~10% on hover, lift + shadow on hover, orange dot, navy title).
 
-## Plan
+## Changes
 
-1. **Regenerate `src/assets/ps-steels-logo.png` as a true transparent PNG (RGBA)**
-   - Use `imagegen--edit_image` on `src/assets/ps-steels-logo-original.png` with a strict prompt: remove the white background completely, output transparent PNG, keep all original brand colors (navy "PS", blue shadow, orange/black welding torch, orange spark, navy "PS STEELS", blue "& ENGINEERING"), preserve clean anti-aliased edges, no white halo.
-   - Verify in code with PIL that the output is mode `RGBA` and corner pixels have alpha `0`. If not, re-run once with a stronger prompt.
+### 1. `src/lib/site.ts`
+- Add an optional `image?: string` field to each `Service` in `SERVICES`, mapped to existing assets in `src/assets/`:
+  - `ss-ms-fabrication` → `hero-workshop.jpg`
+  - `gp-steel-pipe` → `project-gp-pipe.jpg`
+  - `handrail-staircase` → `project-handrail.jpg`
+  - `gate-sitout` → `project-main-gate.jpg`
+  - `hotel-bakery` → `project-hotel-kitchen.jpg`
+  - `catering-counter` → `project-catering.jpg`
+  - `events-decoration` → `project-wedding.jpg`
+  - `marriage-decoration` → `project-wedding.jpg`
+  - `sheet-pipe-bending` → `project-pipe-bending.jpg`
+  - `steel-furniture` → `project-furniture.jpg`
+  - `custom-fabrication` → `project-balcony.jpg`
+- Reuses existing assets — no new image generation needed.
 
-2. **Header (`src/components/site/Header.tsx`)** — no markup change needed; once the PNG is truly transparent the white box disappears against the `bg-background/80` navbar.
+### 2. `src/routes/index.tsx` — service grid (lines ~148–166)
+Update each `<Link>` card to:
+- Add `relative overflow-hidden` to the card.
+- Insert an absolutely-positioned `<img>` background: `absolute inset-0 h-full w-full object-cover opacity-[0.06] grayscale group-hover:opacity-[0.12] transition-opacity duration-300 pointer-events-none`.
+- Add a soft white gradient overlay above the image for legibility: `absolute inset-0 bg-gradient-to-br from-card via-card/85 to-card/70 pointer-events-none`.
+- Wrap existing content (dot+title, description, View details) in a `relative z-10` div so it sits above the image.
+- Add hover lift: append `hover:-translate-y-1` to existing transition classes.
+- Switch the orange-style accent: change the dot color from `bg-steel` to `bg-orange` to match the chosen direction (small visual upgrade, brand-consistent).
 
-3. **Footer (`src/components/site/Footer.tsx`)** — remove the white `bg-white rounded-lg px-3 py-2 shadow-sm` chip wrapper that was added as a workaround, so the logo sits directly on the navy footer. Because the logo's "PS" letters and "PS STEELS" wordmark are dark navy (invisible on navy), use a light variant for the footer:
-   - Option A (preferred, no extra asset): apply a CSS filter to lighten only the dark parts — e.g. wrap in `<img className="h-12 w-auto brightness-0 invert opacity-90" />`. This flattens the brand colors but the mark stays recognizable and clean on dark.
-   - Option B: generate a second asset `src/assets/ps-steels-logo-light.png` where the navy text is recolored to white/light while keeping the orange torch + spark accents, and use it only in the footer.
-   - Default to **Option B** so the orange accent is preserved in the footer too.
+### 3. `src/routes/services.tsx` — leave the long detail sections alone
+The deep service sections already use full hero images per service, so no change needed there. Out of scope.
 
-4. **Quick visual QA**: take a preview screenshot of the home page header (scrolled) and footer to confirm no white box and good legibility on both light and dark backgrounds.
+### Out of scope
+- Materials row (image 5: SS Steel / MS Steel / GP Pipe / Steel Pipe). Can be done in a follow-up if the user wants the same treatment there.
+- Generating new bespoke images per service (existing project photos work well).
+- Layout, copy length, or routing changes.
 
-## Out of scope
-- Navbar layout, colors, or scroll behavior changes.
-- Any other pages or assets.
+## Visual QA
+After edits, view the home page in preview, scroll to the "Steel fabrication services for every need" section, and confirm:
+- Each card shows a faint relevant image behind the text.
+- Text contrast is fully legible on all cards.
+- Hover lifts the card and slightly intensifies the image.
