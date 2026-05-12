@@ -225,20 +225,17 @@ function Home() {
             </div>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold">From idea to installation, in 5 simple steps</h2>
           </div>
-          <ol className="mt-12 grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
-            {PROCESS.map((step, i) => (
-              <li key={step.title} className="bg-white/5 border border-white/10 rounded-2xl p-5">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-md bg-orange text-orange-foreground flex items-center justify-center font-display font-bold">
-                    {i + 1}
-                  </div>
-                  <step.icon className="h-5 w-5 text-white/70" />
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
+            {PROCESS.map((step) => (
+              <div key={step.title} className="bg-white/[0.04] border border-white/10 rounded-2xl p-6 hover:bg-white/[0.07] transition">
+                <div className="h-11 w-11 rounded-xl border border-white/15 bg-white/5 flex items-center justify-center text-orange">
+                  <step.icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-4 font-display font-bold">{step.title}</h3>
-                <p className="mt-1.5 text-sm text-white/70">{step.desc}</p>
-              </li>
+                <h3 className="mt-5 font-display font-bold text-lg text-white">{step.title}</h3>
+                <p className="mt-2 text-sm text-white/65 leading-relaxed">{step.desc}</p>
+              </div>
             ))}
-          </ol>
+          </div>
         </div>
       </section>
 
