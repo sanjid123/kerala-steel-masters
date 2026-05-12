@@ -1,44 +1,125 @@
-## Goal
-Refine the service cards (homepage "What we do" grid) with a subtle, low-opacity background image relevant to each service so they feel modern and visually attractive — text stays primary.
 
-Selected direction: **v1 — Light · Subtle Image** (white card, ~5% opacity grayscale background image, brightens to ~10% on hover, lift + shadow on hover, orange dot, navy title).
+# Goal
 
-## Changes
+Produce **one static folder** you can drag into Hostinger `public_html` (like before), with every page pre-rendered to real HTML so Google, Bing and AI agents (ChatGPT, Perplexity, Claude, Gemini) can crawl and quote your content.
 
-### 1. `src/lib/site.ts`
-- Add an optional `image?: string` field to each `Service` in `SERVICES`, mapped to existing assets in `src/assets/`:
-  - `ss-ms-fabrication` → `hero-workshop.jpg`
-  - `gp-steel-pipe` → `project-gp-pipe.jpg`
-  - `handrail-staircase` → `project-handrail.jpg`
-  - `gate-sitout` → `project-main-gate.jpg`
-  - `hotel-bakery` → `project-hotel-kitchen.jpg`
-  - `catering-counter` → `project-catering.jpg`
-  - `events-decoration` → `project-wedding.jpg`
-  - `marriage-decoration` → `project-wedding.jpg`
-  - `sheet-pipe-bending` → `project-pipe-bending.jpg`
-  - `steel-furniture` → `project-furniture.jpg`
-  - `custom-fabrication` → `project-balcony.jpg`
-- Reuses existing assets — no new image generation needed.
+Domain baked into all SEO files: **https://pssteels.in**
 
-### 2. `src/routes/index.tsx` — service grid (lines ~148–166)
-Update each `<Link>` card to:
-- Add `relative overflow-hidden` to the card.
-- Insert an absolutely-positioned `<img>` background: `absolute inset-0 h-full w-full object-cover opacity-[0.06] grayscale group-hover:opacity-[0.12] transition-opacity duration-300 pointer-events-none`.
-- Add a soft white gradient overlay above the image for legibility: `absolute inset-0 bg-gradient-to-br from-card via-card/85 to-card/70 pointer-events-none`.
-- Wrap existing content (dot+title, description, View details) in a `relative z-10` div so it sits above the image.
-- Add hover lift: append `hover:-translate-y-1` to existing transition classes.
-- Switch the orange-style accent: change the dot color from `bg-steel` to `bg-orange` to match the chosen direction (small visual upgrade, brand-consistent).
+---
 
-### 3. `src/routes/services.tsx` — leave the long detail sections alone
-The deep service sections already use full hero images per service, so no change needed there. Out of scope.
+## What changes
 
-### Out of scope
-- Materials row (image 5: SS Steel / MS Steel / GP Pipe / Steel Pipe). Can be done in a follow-up if the user wants the same treatment there.
-- Generating new bespoke images per service (existing project photos work well).
-- Layout, copy length, or routing changes.
+### 1. Switch the build to Static Site Generation (prerender)
 
-## Visual QA
-After edits, view the home page in preview, scroll to the "Steel fabrication services for every need" section, and confirm:
-- Each card shows a faint relevant image behind the text.
-- Text contrast is fully legible on all cards.
-- Hover lifts the card and slightly intensifies the image.
+Enable TanStack Start's prerender option in `vite.config.ts` so every route is written to disk as a real `.html` file (`/index.html`, `/services/index.html`, `/about/index.html`, `/projects/index.html`, `/contact/index.html`, `/sitemap.xml`, `/404.html`).
+
+Also disable the Cloudflare Worker target so the build outputs a plain static `dist/` folder instead of `client/` + `server/`.
+
+Result after `bun run build`:
+```
+dist/
+  index.html
+  about/index.html
+  services/index.html
+  projects/index.html
+  contact/index.html
+  sitemap.xml
+  robots.txt
+  .htaccess
+  assets/...   (js, css, images)
+```
+
+### 2. Apache `.htaccess` for Hostinger
+
+Add `public/.htaccess` so Hostinger's Apache serves the site correctly:
+- Force HTTPS + non‑www → `pssteels.in`
+- Pretty URLs (`/services` serves `/services/index.html`)
+- Long cache for `assets/*` (immutable hashed files)
+- Gzip/Brotli compression
+- Custom 404 → `/404.html`
+
+### 3. SEO upgrades for Google + AI crawlability
+
+- **Canonical URL** on every route via `<link rel="canonical" href="https://pssteels.in/...">`
+- **Per-page metadata** already exists; tighten titles/descriptions for `/about`, `/services`, `/projects`, `/contact` (under 60 chars title, under 160 chars description)
+- **Open Graph + Twitter** absolute image URL (`https://pssteels.in/og-image.jpg`) instead of bundled hash path
+- **JSON‑LD structured data**:
+  - `LocalBusiness` (already on `/`) — fix `url` to absolute, add `geo` + `sameAs`
+  - `BreadcrumbList` on each inner page
+  - `Service` schema on `/services` (one per service from `SERVICES`)
+  - `FAQPage` schema using `FAQS` from `src/lib/site.ts`
+  - `ItemList` of projects on `/projects`
+- **Semantic HTML pass**: confirm one `<h1>` per page, `<main>`, `<nav>`, `<article>`, `alt` text on every image (uses real product/project names — better for image search and LLM grounding)
+- **`robots.txt`**: allow all + advertise sitemap
+  ```
+  User-agent: *
+  Allow: /
+  Sitemap: https://pssteels.in/sitemap.xml
+  ```
+  Explicitly allow modern AI crawlers (`GPTBot`, `OAI-SearchBot`, `ChatGPT-User`, `PerplexityBot`, `ClaudeBot`, `Google-Extended`) so your content can appear in AI answers.
+- **Sitemap**: convert `src/routes/sitemap[.]xml.ts` from server route to a static file generator (so it ends up at `dist/sitemap.xml`), with absolute URLs and `lastmod`.
+- **Pre‑rendered HTML** means Googlebot sees full content without running JS — fixes the #1 reason Lovable/React sites don't rank.
+
+### 4. Hostinger upload steps (in your reply after build)
+
+1. Run `bun run build` in Lovable / locally.
+2. Download the **`dist/`** folder.
+3. In Hostinger hPanel → **File Manager** → open `public_html`.
+4. Delete old files inside `public_html` (keep the folder).
+5. Upload the **contents** of `dist/` (not the `dist` folder itself) into `public_html`.
+6. Make sure `.htaccess` is uploaded (enable "show hidden files" in File Manager).
+7. Visit `https://pssteels.in` — every page now loads as static HTML.
+8. Submit `https://pssteels.in/sitemap.xml` in Google Search Console + Bing Webmaster Tools.
+
+---
+
+## Technical details
+
+**vite.config.ts** — add prerender, drop Cloudflare:
+```ts
+export default defineConfig({
+  cloudflare: false, // build to plain static dist/
+  tanstackStart: {
+    prerender: {
+      enabled: true,
+      crawlLinks: true,
+      pages: [
+        { path: "/" },
+        { path: "/about" },
+        { path: "/services" },
+        { path: "/projects" },
+        { path: "/contact" },
+        { path: "/sitemap.xml" },
+        { path: "/404", outputPath: "/404.html" },
+      ],
+    },
+  },
+});
+```
+
+**Canonical helper** in `src/lib/seo.ts`:
+```ts
+export const SITE_URL = "https://pssteels.in";
+export const canonical = (path: string) => ({
+  rel: "canonical", href: `${SITE_URL}${path}`,
+});
+```
+Used in each route's `head().links`.
+
+**FAQ schema** added to `/` (Google rich result eligible) using existing `FAQS`.
+
+**Files touched:**
+- `vite.config.ts` — prerender + static target
+- `package.json` — `build` stays `vite build`; outputs to `dist/`
+- `public/.htaccess` *(new)*
+- `public/robots.txt` — replace contents
+- `src/routes/sitemap[.]xml.ts` — replace server handler with build‑time static generation (or move to `public/sitemap.xml` generated by a small `scripts/build-sitemap.ts` ran in `prebuild`)
+- `src/lib/seo.ts` *(new)* — `SITE_URL`, canonical helper, JSON‑LD builders
+- `src/routes/__root.tsx` — absolute OG image, default canonical, fix gtag (keep)
+- `src/routes/index.tsx` — add FAQ + improved LocalBusiness JSON‑LD
+- `src/routes/about.tsx`, `services.tsx`, `projects.tsx`, `contact.tsx` — per‑page title/description/canonical/OG + JSON‑LD (Breadcrumb, Service, ItemList, ContactPoint)
+
+**Out of scope** (ask if you want them):
+- WhatsApp form submissions hitting a backend (currently uses `wa.me` link — works fine on static)
+- Image optimization (could add at build via sharp later)
+- Analytics beyond the existing Google Analytics tag
