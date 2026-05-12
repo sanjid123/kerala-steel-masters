@@ -31,7 +31,7 @@ export default defineConfig({
       },
       maskPath: "/",
     },
-    // We ship a hand-curated public/sitemap.xml instead — auto-generation
-    // includes hash anchors and skips "/" which hurts SEO.
+    // Disable auto-sitemap — we ship a hand-curated public/sitemap.xml.
+    sitemap: { enabled: false },
   },
 });
