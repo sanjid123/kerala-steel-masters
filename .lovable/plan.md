@@ -1,25 +1,9 @@
-## Plan
+## Add PS Steels logo to header and footer
 
-### 1. Footer cleanup
-- Remove the entire "We accept" payments strip block from `src/components/site/Footer.tsx` (the bordered div containing `paymentsStrip`).
-- Drop the now-unused `paymentsStrip` import.
+**Steps**
+1. Copy uploaded `PS_steels_and_Engineering_Logo_1.png` to `src/assets/ps-steels-logo.png`.
+2. Remove background using `imagegen--edit_image` (transparent background) → save as `src/assets/ps-steels-logo.png` (transparent PNG).
+3. Update `src/components/site/Header.tsx`: replace the text-based logo block (the two-line "PS Steels / & Engineering" div) with `<img>` of the transparent logo, sized ~h-10 sm:h-12, `alt="PS Steels & Engineering"`, eager loading.
+4. Update `src/components/site/Footer.tsx`: add the same logo above/replacing the brand text mark, sized appropriately for footer (~h-12), with proper alt text.
 
-### 2. Regenerate service images (premium quality, photoreal)
-Replace these existing assets with new AI-generated images:
-
-- **`src/assets/project-handrail.jpg`** — used by the "SS & MS Steel Fabrication" card and the projects grid "Curved SS Handrail, Private Villa". New shot: a polished stainless steel curved handrail along a modern villa staircase, bright daylight, architectural photography, no people.
-- **`src/assets/project-pipe-bending.jpg`** — used for both "Sheet Bending & Pipe Bending" and "GP Pipe & Steel Pipe Works". Since these need different visuals, split into two files:
-  - Keep `project-pipe-bending.jpg` → regenerate as a workshop scene of precision pipe/sheet bending (CNC bender, bent metal pipes stack, sparks/industrial mood).
-  - Add new **`src/assets/project-gp-pipe.jpg`** → GP pipe structure (galvanized steel pipe handrail/balcony railing or shed structure on a Kerala building exterior).
-- Update `IMAGES["gp-steel-pipe"]` in `src/routes/services.tsx` to point to the new `project-gp-pipe.jpg` import.
-
-All images generated at 1280×960, jpg, premium quality.
-
-### Files touched
-- `src/components/site/Footer.tsx` (remove payments strip)
-- `src/assets/project-handrail.jpg` (regenerate)
-- `src/assets/project-pipe-bending.jpg` (regenerate)
-- `src/assets/project-gp-pipe.jpg` (new)
-- `src/routes/services.tsx` (swap GP pipe image import)
-
-Out of scope: any other layout/copy changes.
+**Out of scope:** color/theme changes, layout restructure beyond the logo swap.
