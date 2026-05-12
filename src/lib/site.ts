@@ -116,6 +116,7 @@ export const SERVICES: Service[] = [
       "Powder coating & polishing",
       "Site installation across Kerala",
     ],
+    image: workshop,
   },
   {
     id: "gp-steel-pipe",
@@ -128,6 +129,7 @@ export const SERVICES: Service[] = [
       "Roofing & staircases",
       "Custom pipe structures",
     ],
+    image: gpPipe,
   },
   {
     id: "handrail-staircase",
@@ -140,6 +142,7 @@ export const SERVICES: Service[] = [
       "Staircase fabrication",
       "Safety & industrial railings",
     ],
+    image: handrail,
   },
   {
     id: "gate-sitout",
@@ -152,6 +155,7 @@ export const SERVICES: Service[] = [
       "Sitout structures",
       "Decorative steel art",
     ],
+    image: mainGate,
   },
   {
     id: "hotel-bakery",
@@ -164,6 +168,7 @@ export const SERVICES: Service[] = [
       "Exhaust & chimney hoods",
       "Storage & prep tables",
     ],
+    image: hotel,
   },
   {
     id: "catering-counter",
@@ -176,6 +181,7 @@ export const SERVICES: Service[] = [
       "Function-ready setups",
       "Branded counter finishes",
     ],
+    image: catering,
   },
   {
     id: "events-decoration",
@@ -188,6 +194,7 @@ export const SERVICES: Service[] = [
       "Event lighting frames",
       "Reusable modular setups",
     ],
+    image: wedding,
   },
   {
     id: "marriage-decoration",
@@ -200,6 +207,7 @@ export const SERVICES: Service[] = [
       "Mandapam structures",
       "Custom function setups",
     ],
+    image: wedding,
   },
   {
     id: "sheet-pipe-bending",
@@ -212,6 +220,7 @@ export const SERVICES: Service[] = [
       "Custom radius & angles",
       "Bulk job-work orders",
     ],
+    image: pipeBending,
   },
   {
     id: "steel-furniture",
@@ -224,6 +233,7 @@ export const SERVICES: Service[] = [
       "Display & retail furniture",
       "Industrial workbenches",
     ],
+    image: furniture,
   },
   {
     id: "custom-fabrication",
@@ -236,6 +246,7 @@ export const SERVICES: Service[] = [
       "Manufacturing & finishing",
       "Delivery & installation",
     ],
+    image: balcony,
   },
 ];
 
