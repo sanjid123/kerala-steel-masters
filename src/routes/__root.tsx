@@ -9,8 +9,8 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
-import ogImage from "@/assets/og-image.jpg";
 import { Header } from "@/components/site/Header";
+import { OG_IMAGE, SITE_URL, organizationLd } from "@/lib/seo";
 import { Footer } from "@/components/site/Footer";
 import { MobileActionBar } from "@/components/site/MobileActionBar";
 import { WhatsAppFab } from "@/components/site/WhatsAppFab";
@@ -69,12 +69,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "theme-color", content: "#0b1f3a" },
       { property: "og:site_name", content: SITE.name },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: ogImage },
+      { property: "og:locale", content: "en_IN" },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:image", content: OG_IMAGE },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: ogImage },
+      { name: "twitter:image", content: OG_IMAGE },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      { name: "googlebot", content: "index, follow" },
+      { name: "geo.region", content: "IN-KL" },
+      { name: "geo.placename", content: "Mannarkkad, Kerala" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.ico" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -91,6 +100,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children:
           "window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-5K1XY0PN8V');",
       },
+      { type: "application/ld+json", children: JSON.stringify(organizationLd()) },
     ],
   }),
   shellComponent: RootShell,
