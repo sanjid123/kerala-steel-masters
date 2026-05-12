@@ -101,6 +101,7 @@ export type Service = {
   title: string;
   short: string;
   bullets: string[];
+  image?: string;
 };
 
 export const SERVICES: Service[] = [
