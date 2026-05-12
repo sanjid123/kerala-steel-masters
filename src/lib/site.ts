@@ -24,26 +24,62 @@ import a8 from "@/assets/avatar-8.jpg";
 export const SITE = {
   name: "PS Steels & Engineering",
   short: "PS Steels",
-  tagline: "Complete SS & MS Steel Fabrication Across Kerala",
+  tagline: "Complete SS and MS Steel Fabrication Across Kerala",
   description:
-    "PS Steels & Engineering, Mannarkkad — custom SS & MS steel fabrication, GP pipe & steel pipe works, handrails, gates, hotel & bakery fabrication and catering counters across Kerala.",
+    "PS Steels and Engineering, Mannarkkad. Custom SS and MS steel fabrication, GP pipe and steel pipe works, handrails, gates, hotel and bakery fabrication and catering counters across Kerala.",
   address: {
     line1: "Vattambalam, Mannarkkad",
     region: "Palakkad, Kerala, India",
     postal: "678582",
   },
+  gstin: "32EGQPP3743B1ZF",
   // Note: brief listed +91 974751022 (only 9 digits). Assuming +91 97475 10220.
   phoneDisplay: "+91 97475 10220",
   phoneTel: "+919747510220",
   whatsappNumber: "919747510220",
   email: "info@pssteels.in",
-  hours: "Mon – Sat · 8:30 AM – 7:30 PM",
+  hours: "Mon to Sat, 8:30 AM to 7:30 PM",
   socials: {
     google: "https://www.google.com/maps?q=Vattambalam+Mannarkkad",
     instagram: "https://instagram.com/pssteels",
     facebook: "https://facebook.com/pssteels",
   },
 };
+
+export const FAQS = [
+  {
+    q: "Which areas in Kerala do you serve for steel fabrication?",
+    a: "We are based in Vattambalam, Mannarkkad and undertake SS, MS, GP pipe and steel pipe fabrication projects across all of Kerala including Palakkad, Ottapalam, Perinthalmanna, Malappuram, Manjeri, Kozhikode, Thrissur, Ernakulam, Kollam and Thiruvananthapuram.",
+  },
+  {
+    q: "What materials do you work with?",
+    a: "We work with stainless steel (Grade 304 and 316), mild steel (MS), GP (galvanized) pipe and steel pipe in round and square sections. We choose the right material based on your project, budget and durability requirement.",
+  },
+  {
+    q: "Is the site visit and quotation really free?",
+    a: "Yes. Free consultation, free site visit and free quotation are part of our standard process. Just send a WhatsApp message or call us with your location and requirement.",
+  },
+  {
+    q: "How long does it take to receive a quotation?",
+    a: "After the site visit, we typically share a transparent quotation within 24 to 48 hours. Larger or fully custom projects may take a little longer for accurate pricing.",
+  },
+  {
+    q: "Do you offer warranty and finishing on fabrication work?",
+    a: "Yes. All works carry a workmanship guarantee. We use precision MIG and TIG welding, mirror or matte polishing for SS, and powder coating or painting for MS as per your requirement.",
+  },
+  {
+    q: "What is the difference between GP pipe and SS pipe works?",
+    a: "GP pipe (galvanized iron) is cost effective and great for handrails, gates and roofing structures. SS pipe is corrosion resistant, ideal for kitchens, hotels, bakeries, balconies and high finish railings. We will recommend the right option for your use case.",
+  },
+  {
+    q: "Can you fabricate based on my own design or drawing?",
+    a: "Absolutely. We do 100 percent custom fabrication based on your design, site measurement, size and requirement, whether it is residential, commercial or industrial.",
+  },
+  {
+    q: "What payment methods do you accept?",
+    a: "We accept all major payment methods including UPI, Google Pay, PhonePe, Paytm, Amazon Pay, Net Banking, Visa, RuPay, Mastercard, American Express and Cash on Delivery.",
+  },
+];
 
 export function waLink(message: string) {
   return `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(message)}`;
