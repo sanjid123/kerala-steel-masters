@@ -4,6 +4,7 @@ import { Phone, Menu, X, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SITE, waLink } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import logo from "@/assets/ps-steels-logo.png";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -19,15 +20,16 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="leading-tight">
-            <div className="font-display font-bold text-base sm:text-lg text-navy tracking-tight">
-              PS Steels
-            </div>
-            <div className="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-steel -mt-0.5 font-semibold">
-              & Engineering
-            </div>
-          </div>
+        <Link to="/" className="flex items-center group" aria-label="PS Steels & Engineering home">
+          <img
+            src={logo}
+            alt="PS Steels & Engineering"
+            width={240}
+            height={72}
+            className="h-10 sm:h-12 w-auto"
+            loading="eager"
+            decoding="async"
+          />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">
