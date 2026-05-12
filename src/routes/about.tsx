@@ -3,19 +3,34 @@ import { CheckCircle2, Factory, Hammer, Users } from "lucide-react";
 import { SERVICE_AREAS, SITE } from "@/lib/site";
 import { CtaBand } from "@/components/site/CtaBand";
 import { SectionHeading } from "@/components/site/SectionHeading";
+import { canonical, breadcrumbLd, absUrl, OG_IMAGE } from "@/lib/seo";
 import hero from "@/assets/hero-workshop.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => {
-    const title = "About PS Steels & Engineering | Mannarkkad Kerala";
+    const title = "About PS Steels — Steel Fabrication Workshop in Mannarkkad";
     const description =
-      "PS Steels & Engineering is a Mannarkkad-based steel fabrication workshop serving Kerala with custom SS, MS, GP pipe and steel pipe works for homes, hotels, bakeries and event teams.";
+      "PS Steels & Engineering is a Mannarkkad workshop serving all of Kerala — custom SS, MS, GP pipe and steel pipe fabrication for homes, hotels, bakeries and event teams.";
     return {
       meta: [
         { title },
         { name: "description", content: description },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
+        { property: "og:url", content: absUrl("/about") },
+        { property: "og:image", content: OG_IMAGE },
+      ],
+      links: [canonical("/about")],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(
+            breadcrumbLd([
+              { name: "Home", path: "/" },
+              { name: "About", path: "/about" },
+            ]),
+          ),
+        },
       ],
     };
   },
