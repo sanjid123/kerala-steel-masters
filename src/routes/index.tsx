@@ -146,7 +146,7 @@ function Home() {
           description="From SS handrails and gates to commercial kitchens, catering counters and wedding stage frames, we cover every major fabrication category."
         />
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {SERVICES.map((s, i) => (
+          {SERVICES.map((s) => (
             <Link
               key={s.id}
               to="/services"
@@ -154,9 +154,7 @@ function Home() {
               className="group block bg-card border border-border rounded-2xl p-6 hover:border-steel hover:shadow-card transition"
             >
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-md bg-navy/5 text-navy flex items-center justify-center font-display font-bold">
-                  {String(i + 1).padStart(2, "0")}
-                </div>
+                <div className="h-2.5 w-2.5 rounded-full bg-steel shrink-0" />
                 <h3 className="font-display font-bold text-lg text-navy">{s.title}</h3>
               </div>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{s.short}</p>
