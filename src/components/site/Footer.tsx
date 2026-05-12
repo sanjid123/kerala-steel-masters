@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, Phone, Instagram, Facebook, Globe, ShieldCheck } from "lucide-react";
 import { SERVICES, SERVICE_AREAS, SITE } from "@/lib/site";
-import paymentsStrip from "@/assets/payments-strip.png";
+
 
 export function Footer() {
   return (
@@ -65,25 +65,6 @@ export function Footer() {
             </li>
           </ul>
           <p className="mt-4 text-xs text-white/50">{SITE.hours}</p>
-        </div>
-      </div>
-
-      {/* Payment methods strip - compact */}
-      <div className="border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="text-[11px] uppercase tracking-[0.18em] text-white/50 font-semibold shrink-0">
-            We accept
-          </div>
-          <div className="bg-white/95 rounded-lg px-3 py-2 max-w-full">
-            <img
-              src={paymentsStrip}
-              alt="Accepted payments: Paytm, Google Pay, UPI, COD, PhonePe, Amazon Pay, Net Banking, Visa, RuPay, Mastercard, Amex"
-              loading="lazy"
-              width={1536}
-              height={1024}
-              className="h-10 sm:h-12 w-auto object-contain"
-            />
-          </div>
         </div>
       </div>
 
