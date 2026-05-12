@@ -64,14 +64,14 @@ function AboutPage() {
             title="Strong work. Honest pricing. On-time delivery."
           />
           <p className="mt-5 text-muted-foreground leading-relaxed">
-            We treat every project — from a single SS handrail to a full hotel kitchen — with the same standard of craftsmanship. Materials are sourced from trusted suppliers. Welding is done by experienced technicians. Finishing is checked at every stage.
+            We treat every project, from a single SS handrail to a full hotel kitchen, with the same standard of craftsmanship. Materials are sourced from trusted suppliers. Welding is done by experienced technicians. Finishing is checked at every stage.
           </p>
           <ul className="mt-6 space-y-2.5">
             {[
               "Free consultation, site visit and quotation",
               "Custom fabrication based on your exact requirement",
               "Quality SS, MS, GP pipe and steel pipe materials",
-              "Professional finishing — polishing, powder coating, painting",
+              "Professional finishing, polishing, powder coating, painting",
               "Delivery and installation across Kerala",
             ].map((p) => (
               <li key={p} className="flex items-start gap-2 text-sm">

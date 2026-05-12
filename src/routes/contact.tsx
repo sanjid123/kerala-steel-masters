@@ -28,7 +28,7 @@ function ContactPage() {
           <div className="text-xs font-semibold uppercase tracking-[0.18em] text-orange">Get in touch</div>
           <h1 className="mt-3 font-display text-4xl sm:text-5xl lg:text-6xl font-bold">Let's talk about your project</h1>
           <p className="mt-4 text-white/70 max-w-2xl">
-            Free consultation, site visit and quotation across Kerala. Reach us by call, WhatsApp or email — usually we respond within an hour during working hours.
+            Free consultation, site visit and quotation across Kerala. Reach us by call, WhatsApp or email, usually we respond within an hour during working hours.
           </p>
         </div>
       </section>
@@ -51,7 +51,7 @@ function ContactPage() {
             </div>
             <div>
               <div className="font-display font-bold text-navy">WhatsApp</div>
-              <div className="text-sm text-muted-foreground">Chat with us — fastest response</div>
+              <div className="text-sm text-muted-foreground">Chat with us, fastest response</div>
             </div>
           </a>
 
@@ -101,7 +101,7 @@ function ContactPage() {
 
         <div className="overflow-hidden rounded-3xl border border-border shadow-card min-h-[420px]">
           <iframe
-            title="PS Steels location — Vattambalam, Mannarkkad"
+            title="PS Steels location, Vattambalam, Mannarkkad"
             src="https://www.google.com/maps?q=Vattambalam,+Mannarkkad,+Kerala&output=embed"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"

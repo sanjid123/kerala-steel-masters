@@ -54,7 +54,7 @@ export const Route = createFileRoute("/")({
 const MATERIALS = [
   { name: "SS Steel", desc: "Grade 304 / 316 stainless steel" },
   { name: "MS Steel", desc: "Mild steel for heavy structures" },
-  { name: "GP Pipe", desc: "Galvanized pipe — long-lasting" },
+  { name: "GP Pipe", desc: "Galvanized pipe, long-lasting" },
   { name: "Steel Pipe", desc: "Round & square steel pipes" },
 ];
 
@@ -70,7 +70,7 @@ const VALUES = [
   { icon: Wrench, title: "Custom Fabrication", desc: "Built exactly to your design, size and site." },
   { icon: ShieldCheck, title: "Quality Finishing", desc: "Precision welding, polishing & powder coating." },
   { icon: Truck, title: "On-Time Delivery", desc: "Promised timelines, honored every time." },
-  { icon: Factory, title: "Kerala-wide Service", desc: "Workshops in Mannarkkad — projects across Kerala." },
+  { icon: Factory, title: "Kerala-wide Service", desc: "Workshops in Mannarkkad, projects across Kerala." },
 ];
 
 function Home() {
@@ -99,7 +99,7 @@ function Home() {
               <br className="hidden sm:block" /> Fabrication Across Kerala
             </h1>
             <p className="mt-5 text-base sm:text-lg text-white/75 max-w-2xl leading-relaxed">
-              Custom fabrication and steel works in SS Steel, MS Steel, GP Pipe and Steel Pipe — designed and manufactured to your exact requirement with quality finishing and durable materials.
+              Custom fabrication and steel works in SS Steel, MS Steel, GP Pipe and Steel Pipe, designed and manufactured to your exact requirement with quality finishing and durable materials.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -143,7 +143,7 @@ function Home() {
         <SectionHeading
           eyebrow="What we do"
           title="Steel fabrication services for every need"
-          description="From SS handrails and gates to commercial kitchens, catering counters and wedding stage frames — we cover every major fabrication category."
+          description="From SS handrails and gates to commercial kitchens, catering counters and wedding stage frames, we cover every major fabrication category."
         />
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {SERVICES.map((s, i) => (
@@ -264,7 +264,7 @@ function Home() {
           <SectionHeading
             eyebrow="Service areas"
             title="Steel fabrication across all of Kerala"
-            description="Based in Vattambalam, Mannarkkad — we deliver and install across every major district in Kerala."
+            description="Based in Vattambalam, Mannarkkad, we deliver and install across every major district in Kerala."
           />
           <div className="mt-8 flex flex-wrap gap-2">
             {SERVICE_AREAS.map((c) => (

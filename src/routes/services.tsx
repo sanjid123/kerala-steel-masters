@@ -36,9 +36,9 @@ IMAGES["sitout"] = sitout;
 
 export const Route = createFileRoute("/services")({
   head: () => {
-    const title = "Services | SS Fabrication, GP Pipe, Handrail, Gate Works — PS Steels Kerala";
+    const title = "Services | SS Fabrication, GP Pipe, Handrail, Gate Works, PS Steels Kerala";
     const description =
-      "All steel fabrication services from PS Steels, Mannarkkad — SS & MS steel works, GP pipe & steel pipe fabrication, handrails, gates, hotel & bakery fabrication, catering counters, wedding stage works, sheet & pipe bending, steel furniture and custom fabrication across Kerala.";
+      "All steel fabrication services from PS Steels, Mannarkkad, SS & MS steel works, GP pipe & steel pipe fabrication, handrails, gates, hotel & bakery fabrication, catering counters, wedding stage works, sheet & pipe bending, steel furniture and custom fabrication across Kerala.";
     return {
       meta: [
         { title },
@@ -110,7 +110,7 @@ function ServicesPage() {
         })}
       </div>
 
-      <CtaBand title="Got a different requirement?" subtitle="We do custom fabrication on demand. Message us your idea — we'll handle the rest." />
+      <CtaBand title="Got a different requirement?" subtitle="We do custom fabrication on demand. Message us your idea, we'll handle the rest." />
     </>
   );
 }

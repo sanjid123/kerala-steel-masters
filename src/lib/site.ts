@@ -214,7 +214,7 @@ export const SERVICES: Service[] = [
     id: "steel-furniture",
     title: "Steel Furniture Works",
     short:
-      "Customized steel furniture — tables, chairs, racks, storage units and commercial furniture.",
+      "Customized steel furniture, tables, chairs, racks, storage units and commercial furniture.",
     bullets: [
       "Tables & chairs",
       "Racks & storage units",
@@ -226,7 +226,7 @@ export const SERVICES: Service[] = [
     id: "custom-fabrication",
     title: "Custom Fabrication on Demand",
     short:
-      "Made-to-order fabrication based on your design, size and site requirement — residential or commercial.",
+      "Made-to-order fabrication based on your design, size and site requirement, residential or commercial.",
     bullets: [
       "Free consultation & site visit",
       "Design & sample approval",
@@ -245,14 +245,14 @@ export type Project = {
 };
 
 export const PROJECTS: Project[] = [
-  { id: "p1", title: "Curved SS Handrail – Private Villa", category: "Handrails", image: handrail,
+  { id: "p1", title: "Curved SS Handrail, Private Villa", category: "Handrails", image: handrail,
     description: "Polished Grade 304 stainless steel handrail with seamless curves for a luxury residential staircase." },
   { id: "p2", title: "Designer MS Sliding Gate", category: "Gates", image: gate,
     description: "Powder-coated MS sliding gate with geometric pattern, fabricated and installed in Mannarkkad." },
   { id: "p3", title: "Heavy Duty Main Gate", category: "Gates", image: mainGate,
     description: "Robust MS swing gate with grill design for a residential compound." },
   { id: "p4", title: "Glass Balcony Railing", category: "Handrails", image: balcony,
-    description: "SS posts with toughened glass infill — apartment project in Kozhikode." },
+    description: "SS posts with toughened glass infill, apartment project in Kozhikode." },
   { id: "p5", title: "Hotel Commercial Kitchen", category: "Hotel & Bakery", image: hotel,
     description: "End-to-end SS kitchen counters, shelving and exhaust hoods for a hotel in Palakkad." },
   { id: "p6", title: "Bakery Display Counter", category: "Hotel & Bakery", image: bakery,
@@ -286,7 +286,7 @@ export const TESTIMONIALS: Testimonial[] = [
   { name: "Mohanan Nair", location: "Ottapalam", work: "Hotel Kitchen", rating: 5, avatar: a3,
     quote: "From design to installation, fully professional. Our entire commercial kitchen is by PS Steels. Very durable work." },
   { name: "Anand Krishnan", location: "Perinthalmanna", work: "Bakery Display", rating: 5, avatar: a4,
-    quote: "Bakery counter and shelving are perfect. Free consultation and quote — they understood exactly what we needed for our outlet." },
+    quote: "Bakery counter and shelving are perfect. Free consultation and quote, they understood exactly what we needed for our outlet." },
   { name: "Lakshmi Pillai", location: "Thrissur", work: "Balcony Railing", rating: 5, avatar: a5,
     quote: "Beautiful glass and SS balcony railing for our home. Clean job, no scratches, very neat installation." },
   { name: "Vipin Raj", location: "Kozhikode", work: "Architect", rating: 5, avatar: a6,
