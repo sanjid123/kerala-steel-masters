@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, MessageCircle, Phone } from "lucide-react";
 import { SERVICES, SITE, waLink } from "@/lib/site";
-import { SectionHeading } from "@/components/site/SectionHeading";
+
 import { CtaBand } from "@/components/site/CtaBand";
 import handrail from "@/assets/project-handrail.jpg";
 import gate from "@/assets/project-gate.jpg";
