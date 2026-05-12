@@ -19,13 +19,14 @@ import catering from "@/assets/project-catering.jpg";
 import wedding from "@/assets/project-wedding.jpg";
 import furniture from "@/assets/project-furniture.jpg";
 import pipe from "@/assets/project-pipe-bending.jpg";
+import gpPipe from "@/assets/project-gp-pipe.jpg";
 import balcony from "@/assets/project-balcony.jpg";
 import sitout from "@/assets/project-sitout.jpg";
 import mainGate from "@/assets/project-main-gate.jpg";
 
 const IMAGES: Record<string, string> = {
   "ss-ms-fabrication": handrail,
-  "gp-steel-pipe": pipe,
+  "gp-steel-pipe": gpPipe,
   "handrail-staircase": balcony,
   "gate-sitout": gate,
   "hotel-bakery": hotel,
