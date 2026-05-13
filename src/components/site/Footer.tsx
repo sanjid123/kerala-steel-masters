@@ -80,11 +80,10 @@ export function Footer() {
             ))}
             <li className="pt-1">
               <Link
-                to="/"
-                hash="service-areas"
+                to="/service-areas"
                 className="text-orange hover:text-orange/80 font-semibold inline-flex items-center gap-1"
               >
-                + all Kerala towns →
+                All Kerala →
               </Link>
             </li>
           </ul>
@@ -118,8 +117,7 @@ export function Footer() {
             Services all over Kerala — serving all 14 districts from Kasaragod to Thiruvananthapuram.
           </p>
           <Link
-            to="/"
-            hash="service-areas"
+            to="/service-areas"
             className="text-orange hover:text-orange/80 font-semibold text-sm inline-flex items-center gap-1"
           >
             Find your area →

@@ -61,6 +61,7 @@ const push = (path, priority, changefreq = "weekly") =>
 push("/", "1.0");
 push("/services", "0.9");
 push("/projects", "0.8");
+push("/service-areas", "0.7");
 push("/about", "0.7", "monthly");
 push("/contact", "0.7", "monthly");
 
