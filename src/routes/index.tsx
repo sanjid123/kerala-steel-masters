@@ -85,27 +85,49 @@ function Home() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-navy text-white">
+      <section
+        className="relative overflow-hidden bg-navy text-white min-h-[78vh] lg:min-h-[86vh] flex items-center"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        aria-roledescription="carousel"
+      >
         <img
           src={heroImg}
           alt="Stainless steel handrail being welded in PS Steels workshop, Kerala"
           width={1920}
           height={1080}
-          className="absolute inset-0 h-full w-full object-cover opacity-40"
+          className="absolute inset-0 h-full w-full object-cover opacity-70"
         />
-        <div className="absolute inset-0 bg-gradient-to-tr from-navy via-navy/85 to-navy/40" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-24 sm:pt-24 sm:pb-32 lg:pt-32 lg:pb-40">
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy/70 via-transparent to-transparent" />
+
+        <div className="relative w-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white/90 backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5 text-orange" />
-              Mannarkkad · Palakkad · Serving all Kerala
+            <div className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-white/85">
+              <span className="h-1.5 w-1.5 rounded-full bg-orange" />
+              Let us help you build · Mannarkkad, Kerala
             </div>
-            <h1 className="mt-5 font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] text-balance">
-              Complete <span className="text-orange">SS & MS</span> Steel
-              <br className="hidden sm:block" /> Fabrication Across Kerala
+
+            <h1 className="mt-6 font-display font-bold leading-[0.95] tracking-tight">
+              <span className="block text-2xl sm:text-3xl lg:text-4xl text-white/90">
+                Complete SS &amp; MS Steel
+              </span>
+              <span
+                key={wordIdx}
+                data-text={HERO_WORDS[wordIdx]}
+                className="hero-bigword hero-word-fade mt-2 block text-6xl sm:text-7xl lg:text-8xl"
+              >
+                {HERO_WORDS[wordIdx]}
+              </span>
+              <span className="mt-3 block text-2xl sm:text-3xl lg:text-4xl text-white/90">
+                Across Kerala
+              </span>
             </h1>
-            <p className="mt-5 text-base sm:text-lg text-white/75 max-w-2xl leading-relaxed">
-              Custom fabrication and steel works in SS Steel, MS Steel, GP Pipe and Steel Pipe, designed and manufactured to your exact requirement with quality finishing and durable materials.
+
+            <p className="mt-6 text-base sm:text-lg text-white/75 max-w-2xl leading-relaxed">
+              Custom fabrication in SS Steel, MS Steel, GP Pipe and Steel Pipe — designed
+              and manufactured to your exact requirement, with precision finishing and
+              durable materials.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -127,6 +149,30 @@ function Home() {
                   <span className="h-1.5 w-1.5 rounded-full bg-orange" /> {t}
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Slider controls */}
+          <div className="mt-12 lg:mt-0 lg:absolute lg:right-8 lg:bottom-8 flex items-center gap-4 text-white/80">
+            <button
+              type="button"
+              onClick={goPrev}
+              aria-label="Previous"
+              className="h-11 w-11 rounded-full border border-white/30 hover:border-orange hover:text-orange flex items-center justify-center transition-colors"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              onClick={goNext}
+              aria-label="Next"
+              className="h-11 w-11 rounded-full border border-white/30 hover:border-orange hover:text-orange flex items-center justify-center transition-colors"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+            <div className="font-display text-sm tabular-nums tracking-wider">
+              <span className="text-orange">{String(wordIdx + 1).padStart(2, "0")}</span>
+              <span className="text-white/40"> / {String(HERO_WORDS.length).padStart(2, "0")}</span>
             </div>
           </div>
         </div>
