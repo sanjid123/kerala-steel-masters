@@ -83,7 +83,7 @@ function ProjectsPage() {
               className="group text-left overflow-hidden rounded-2xl bg-card border border-border shadow-card hover:shadow-elegant transition"
             >
               <div className="aspect-[4/3] overflow-hidden">
-                <img src={p.image} alt={p.title} loading="lazy" width={1024} height={768}
+                <img src={p.image} alt={p.title} loading="lazy" decoding="async" width={1024} height={768}
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
               <div className="p-5">

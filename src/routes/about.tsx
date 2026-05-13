@@ -67,7 +67,7 @@ function AboutPage() {
             </div>
           </div>
           <div className="overflow-hidden rounded-3xl aspect-[4/3] shadow-elegant">
-            <img src={hero} alt="PS Steels workshop" loading="lazy" width={1920} height={1080} className="h-full w-full object-cover" />
+            <img src={hero} alt="PS Steels workshop" loading="lazy" decoding="async" width={1920} height={1080} className="h-full w-full object-cover" />
           </div>
         </div>
       </section>

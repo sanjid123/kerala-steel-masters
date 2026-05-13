@@ -135,7 +135,7 @@ function ServicesPage() {
               className={`grid lg:grid-cols-2 gap-10 items-center scroll-mt-24 ${reverse ? "lg:[&>*:first-child]:order-2" : ""}`}
             >
               <div className="overflow-hidden rounded-3xl shadow-card aspect-[4/3]">
-                <img src={IMAGES[s.id] ?? handrail} alt={`${s.title} in Kerala by PS Steels`} loading="lazy" width={1024} height={768} className="h-full w-full object-cover" />
+                <img src={IMAGES[s.id] ?? handrail} alt={`${s.title} in Kerala by PS Steels`} loading="lazy" decoding="async" width={1024} height={768} className="h-full w-full object-cover" />
               </div>
               <div>
                 <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-steel">
