@@ -11,7 +11,6 @@ import {
 
 import { CtaBand } from "@/components/site/CtaBand";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import { ServiceAreaExplorer } from "@/components/site/ServiceAreaExplorer";
 import handrail from "@/assets/project-handrail.jpg";
 import gate from "@/assets/project-gate.jpg";
 import hotel from "@/assets/project-hotel-kitchen.jpg";
@@ -65,11 +64,6 @@ export const Route = createFileRoute("/services")({
       meta: [
         { title },
         { name: "description", content: description },
-        {
-          name: "keywords",
-          content:
-            "GP pipe works Kerala, SS fabrication Kerala, MS steel works Mannarkkad, steel pipe fabrication Palakkad, stainless steel handrail Kerala, MS gate fabrication, hotel kitchen fabrication Kerala, bakery counter fabrication, catering counter Kerala, wedding stage steel works, custom steel fabrication Mannarkkad",
-        },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:url", content: absUrl("/services") },
@@ -108,14 +102,6 @@ function ServicesPage() {
           </p>
         </div>
       </section>
-
-      {/* SERVICE AREA FINDER */}
-      <section className="bg-muted/40 border-b border-border">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-14">
-          <ServiceAreaExplorer />
-        </div>
-      </section>
-
 
       <section className="border-b border-border bg-card">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 grid lg:grid-cols-2 gap-8">

@@ -24,8 +24,8 @@ export const Route = createFileRoute("/service-areas")({
         property: "og:description",
         content: "Search by pincode or town across Kerala.",
       },
-      { rel: "canonical", href: canonical("/service-areas") } as never,
     ],
+    links: [canonical("/service-areas")],
   }),
   component: ServiceAreasPage,
 });
