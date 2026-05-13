@@ -78,10 +78,9 @@ export function FoundResult({ result }: { result: PincodeLookupResult }) {
         Serving Area Found
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 rounded-2xl bg-muted/40 border border-border p-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 rounded-2xl bg-muted/40 border border-border p-4">
         <Detail label="District" value={result.district} />
         <Detail label="Pincode" value={result.pincode} mono />
-        <Detail label="Post Office" value={result.office} />
       </div>
 
       {towns.length > 0 && (
@@ -113,18 +112,6 @@ export function FoundResult({ result }: { result: PincodeLookupResult }) {
             </Button>
           </Link>
         )}
-        <a
-          href={waLink(
-            `Hi PS Steels, I'm in ${result.office} (${result.district}, pincode ${result.pincode}). I'd like a free quotation.`,
-          )}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <Button variant="outline" className="gap-2">
-            <MessageCircle className="h-4 w-4 text-whatsapp" />
-            WhatsApp about {result.pincode}
-          </Button>
-        </a>
         <a href={`tel:${SITE.phoneTel}`} className="hidden sm:inline-flex">
           <Button variant="ghost" className="gap-2">
             Call {SITE.phoneDisplay}
