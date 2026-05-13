@@ -64,6 +64,23 @@ const VALUES = [
 
 function Home() {
   const featured = PROJECTS.slice(0, 6);
+  const HERO_WORDS = ["FABRICATING", "WELDING", "INSTALLING"] as const;
+  const [wordIdx, setWordIdx] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused) return;
+    const id = window.setInterval(
+      () => setWordIdx((i) => (i + 1) % HERO_WORDS.length),
+      4000,
+    );
+    return () => window.clearInterval(id);
+  }, [paused]);
+
+  const goPrev = () =>
+    setWordIdx((i) => (i - 1 + HERO_WORDS.length) % HERO_WORDS.length);
+  const goNext = () => setWordIdx((i) => (i + 1) % HERO_WORDS.length);
+
 
   return (
     <>
