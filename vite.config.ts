@@ -11,26 +11,34 @@ const PAGES = [
   { path: "/contact" },
 ];
 
+// Only apply static-export options at production build time.
+// In dev (Lovable preview) we keep the Cloudflare Worker SSR runtime so the preview hydrates.
+const isBuild = process.env.NODE_ENV === "production";
+
 export default defineConfig({
-  cloudflare: false,
+  cloudflare: !isBuild,
   tanstackStart: {
     pages: PAGES,
-    prerender: {
-      enabled: true,
-      crawlLinks: true,
-      autoSubfolderIndex: true,
-      failOnError: false,
-    },
-    spa: {
-      enabled: true,
-      prerender: {
-        enabled: true,
-        outputPath: "/index.html",
-        crawlLinks: true,
-        retryCount: 1,
-      },
-      maskPath: "/",
-    },
+    prerender: isBuild
+      ? {
+          enabled: true,
+          crawlLinks: true,
+          autoSubfolderIndex: true,
+          failOnError: false,
+        }
+      : undefined,
+    spa: isBuild
+      ? {
+          enabled: true,
+          prerender: {
+            enabled: true,
+            outputPath: "/index.html",
+            crawlLinks: true,
+            retryCount: 1,
+          },
+          maskPath: "/",
+        }
+      : undefined,
     // Disable auto-sitemap — we ship a hand-curated public/sitemap.xml.
     sitemap: { enabled: false },
   },

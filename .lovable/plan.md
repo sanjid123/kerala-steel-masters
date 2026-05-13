@@ -1,125 +1,70 @@
+## Goals
 
-# Goal
-
-Produce **one static folder** you can drag into Hostinger `public_html` (like before), with every page pre-rendered to real HTML so Google, Bing and AI agents (ChatGPT, Perplexity, Claude, Gemini) can crawl and quote your content.
-
-Domain baked into all SEO files: **https://pssteels.in**
+1. Add a `README.md` so you can verify (and document) which GitHub repo + branch this project is synced to.
+2. Restore the Lovable preview, which currently renders a blank/stuck page after the static-site (SSG) conversion.
 
 ---
 
-## What changes
+## Part 1 — Preview not loading (root cause)
 
-### 1. Switch the build to Static Site Generation (prerender)
+The previous edit set `cloudflare: false` and enabled `spa.prerender` + `maskPath: "/"` in `vite.config.ts`. That config is meant for a **production static export** to Hostinger — it is not compatible with Lovable's live preview, which expects the Cloudflare Worker SSR runtime. Result: dev server returns HTML, but the preview iframe never finishes hydrating.
 
-Enable TanStack Start's prerender option in `vite.config.ts` so every route is written to disk as a real `.html` file (`/index.html`, `/services/index.html`, `/about/index.html`, `/projects/index.html`, `/contact/index.html`, `/sitemap.xml`, `/404.html`).
+**Fix:** make the static-export options apply only at build time, not in dev.
 
-Also disable the Cloudflare Worker target so the build outputs a plain static `dist/` folder instead of `client/` + `server/`.
-
-Result after `bun run build`:
-```
-dist/
-  index.html
-  about/index.html
-  services/index.html
-  projects/index.html
-  contact/index.html
-  sitemap.xml
-  robots.txt
-  .htaccess
-  assets/...   (js, css, images)
-```
-
-### 2. Apache `.htaccess` for Hostinger
-
-Add `public/.htaccess` so Hostinger's Apache serves the site correctly:
-- Force HTTPS + non‑www → `pssteels.in`
-- Pretty URLs (`/services` serves `/services/index.html`)
-- Long cache for `assets/*` (immutable hashed files)
-- Gzip/Brotli compression
-- Custom 404 → `/404.html`
-
-### 3. SEO upgrades for Google + AI crawlability
-
-- **Canonical URL** on every route via `<link rel="canonical" href="https://pssteels.in/...">`
-- **Per-page metadata** already exists; tighten titles/descriptions for `/about`, `/services`, `/projects`, `/contact` (under 60 chars title, under 160 chars description)
-- **Open Graph + Twitter** absolute image URL (`https://pssteels.in/og-image.jpg`) instead of bundled hash path
-- **JSON‑LD structured data**:
-  - `LocalBusiness` (already on `/`) — fix `url` to absolute, add `geo` + `sameAs`
-  - `BreadcrumbList` on each inner page
-  - `Service` schema on `/services` (one per service from `SERVICES`)
-  - `FAQPage` schema using `FAQS` from `src/lib/site.ts`
-  - `ItemList` of projects on `/projects`
-- **Semantic HTML pass**: confirm one `<h1>` per page, `<main>`, `<nav>`, `<article>`, `alt` text on every image (uses real product/project names — better for image search and LLM grounding)
-- **`robots.txt`**: allow all + advertise sitemap
-  ```
-  User-agent: *
-  Allow: /
-  Sitemap: https://pssteels.in/sitemap.xml
-  ```
-  Explicitly allow modern AI crawlers (`GPTBot`, `OAI-SearchBot`, `ChatGPT-User`, `PerplexityBot`, `ClaudeBot`, `Google-Extended`) so your content can appear in AI answers.
-- **Sitemap**: convert `src/routes/sitemap[.]xml.ts` from server route to a static file generator (so it ends up at `dist/sitemap.xml`), with absolute URLs and `lastmod`.
-- **Pre‑rendered HTML** means Googlebot sees full content without running JS — fixes the #1 reason Lovable/React sites don't rank.
-
-### 4. Hostinger upload steps (in your reply after build)
-
-1. Run `bun run build` in Lovable / locally.
-2. Download the **`dist/`** folder.
-3. In Hostinger hPanel → **File Manager** → open `public_html`.
-4. Delete old files inside `public_html` (keep the folder).
-5. Upload the **contents** of `dist/` (not the `dist` folder itself) into `public_html`.
-6. Make sure `.htaccess` is uploaded (enable "show hidden files" in File Manager).
-7. Visit `https://pssteels.in` — every page now loads as static HTML.
-8. Submit `https://pssteels.in/sitemap.xml` in Google Search Console + Bing Webmaster Tools.
-
----
-
-## Technical details
-
-**vite.config.ts** — add prerender, drop Cloudflare:
 ```ts
+// vite.config.ts
+const isBuild = process.env.NODE_ENV === "production";
+
 export default defineConfig({
-  cloudflare: false, // build to plain static dist/
+  cloudflare: !isBuild ? true : false,         // keep Worker runtime in dev
   tanstackStart: {
-    prerender: {
-      enabled: true,
-      crawlLinks: true,
-      pages: [
-        { path: "/" },
-        { path: "/about" },
-        { path: "/services" },
-        { path: "/projects" },
-        { path: "/contact" },
-        { path: "/sitemap.xml" },
-        { path: "/404", outputPath: "/404.html" },
-      ],
-    },
+    pages: PAGES,
+    prerender: isBuild ? { enabled: true, crawlLinks: true, autoSubfolderIndex: true, failOnError: false } : undefined,
+    spa: isBuild ? { enabled: true, prerender: { enabled: true, outputPath: "/index.html", crawlLinks: true, retryCount: 1 }, maskPath: "/" } : undefined,
+    sitemap: { enabled: false },
   },
 });
 ```
 
-**Canonical helper** in `src/lib/seo.ts`:
-```ts
-export const SITE_URL = "https://pssteels.in";
-export const canonical = (path: string) => ({
-  rel: "canonical", href: `${SITE_URL}${path}`,
-});
+This keeps Lovable preview working normally while `bun run build` still produces the fully prerendered static `dist/client` you upload to Hostinger.
+
+## Part 2 — GitHub sync check via README
+
+Lovable does not expose a programmatic "is this repo connected" API to the running app, but we can:
+
+1. Create `README.md` at the project root containing:
+   - **Repo & branch placeholders** you fill in once (e.g. `github.com/<you>/pssteels` on `main`)
+   - A **manual verification checklist** (open repo → confirm latest commit hash matches Lovable's last edit timestamp)
+   - A `git remote -v` / `git rev-parse --abbrev-ref HEAD` snippet for local verification
+   - Hostinger deployment recap (build → upload `dist/client` contents)
+2. Because Lovable auto-syncs every change to GitHub, the presence of the README appearing in your repo is itself the proof the connection works — if it does not show up on github.com within ~30 s of this change, the repo is not connected.
+
+### README outline
+
 ```
-Used in each route's `head().links`.
+# PS Steels & Engineering — Site
 
-**FAQ schema** added to `/` (Google rich result eligible) using existing `FAQS`.
+## GitHub Sync
+- Repo:   github.com/<owner>/<repo>
+- Branch: main
+- Verify: `git remote -v` and check latest commit on github.com matches Lovable's last edit.
 
-**Files touched:**
-- `vite.config.ts` — prerender + static target
-- `package.json` — `build` stays `vite build`; outputs to `dist/`
-- `public/.htaccess` *(new)*
-- `public/robots.txt` — replace contents
-- `src/routes/sitemap[.]xml.ts` — replace server handler with build‑time static generation (or move to `public/sitemap.xml` generated by a small `scripts/build-sitemap.ts` ran in `prebuild`)
-- `src/lib/seo.ts` *(new)* — `SITE_URL`, canonical helper, JSON‑LD builders
-- `src/routes/__root.tsx` — absolute OG image, default canonical, fix gtag (keep)
-- `src/routes/index.tsx` — add FAQ + improved LocalBusiness JSON‑LD
-- `src/routes/about.tsx`, `services.tsx`, `projects.tsx`, `contact.tsx` — per‑page title/description/canonical/OG + JSON‑LD (Breadcrumb, Service, ItemList, ContactPoint)
+## Local dev
+bun install && bun run dev
 
-**Out of scope** (ask if you want them):
-- WhatsApp form submissions hitting a backend (currently uses `wa.me` link — works fine on static)
-- Image optimization (could add at build via sharp later)
-- Analytics beyond the existing Google Analytics tag
+## Production build (Hostinger)
+bun run build
+# Upload contents of dist/client/ to public_html/
+```
+
+---
+
+## Files to change
+
+- `vite.config.ts` — gate SSG options behind `NODE_ENV === "production"`
+- `README.md` — new file (sync verification + deploy recap)
+
+## Out of scope
+
+- No changes to routes, SEO, `.htaccess`, sitemap, or assets.
+- No GitHub API integration (Lovable does not expose repo metadata to app code).
