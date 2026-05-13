@@ -76,9 +76,9 @@ function Home() {
           loading="eager"
           fetchPriority="high"
           decoding="async"
-          className="absolute inset-0 h-full w-full object-cover opacity-40"
+          className="absolute inset-0 h-full w-full object-cover opacity-60"
         />
-        <div className="absolute inset-0 bg-gradient-to-tr from-navy via-navy/85 to-navy/40" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-navy/85 via-navy/60 to-navy/20" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-20 sm:pt-20 sm:pb-24 lg:pt-24 lg:pb-28 grid lg:grid-cols-[minmax(0,1fr)_minmax(0,460px)] gap-10 lg:gap-12 items-center">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white/90 backdrop-blur">

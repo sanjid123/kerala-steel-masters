@@ -72,7 +72,7 @@ export function ServiceAreaExplorer() {
   }
 
   return (
-    <div className="rounded-3xl border border-border shadow-card overflow-hidden bg-gradient-to-br from-navy to-navy/90 text-white px-6 sm:px-8 py-7">
+    <div className="rounded-3xl border border-border shadow-card bg-gradient-to-br from-navy to-navy/90 text-white px-6 sm:px-8 py-7">
       <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-orange">
         <span className="h-px w-8 bg-orange" /> Service Area Explorer
       </div>
@@ -115,7 +115,7 @@ export function ServiceAreaExplorer() {
         </Button>
 
         {open && suggestions.length > 0 && (
-          <div className="absolute left-0 right-0 sm:right-[7.5rem] top-[calc(100%+6px)] z-20 rounded-xl border border-border bg-popover text-popover-foreground shadow-lg overflow-hidden">
+          <div className="absolute left-0 right-0 top-[calc(100%+6px)] z-20 rounded-xl border border-border bg-popover text-popover-foreground shadow-lg overflow-hidden">
             <ul role="listbox" className="max-h-72 overflow-y-auto py-1">
               {suggestions.map((s, i) => (
                 <li key={`${s.pincode}-${s.office}`} role="option" aria-selected={i === highlight}>

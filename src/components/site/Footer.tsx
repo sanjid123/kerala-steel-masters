@@ -109,6 +109,35 @@ export function Footer() {
         </div>
       </div>
 
+      {/* We accept — payment methods */}
+      <div className="border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row gap-3 sm:gap-6 sm:items-center">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/60 shrink-0">
+            We accept
+          </span>
+          <ul className="flex flex-wrap items-center gap-x-2.5 gap-y-2">
+            {[
+              "UPI",
+              "Google Pay",
+              "PhonePe",
+              "Paytm",
+              "Net Banking",
+              "Visa",
+              "RuPay",
+              "Mastercard",
+              "Razorpay",
+            ].map((m) => (
+              <li
+                key={m}
+                className="rounded-md border border-white/15 bg-white/5 px-2.5 py-1 text-xs font-medium text-white/85"
+              >
+                {m}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
       {/* Coverage band — all city links remain crawlable via sr-only nav */}
       <div className="border-t border-white/10 bg-white/[0.02]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row gap-3 items-center justify-between text-sm">
