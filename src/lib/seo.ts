@@ -1,6 +1,7 @@
 // SEO helpers — single source of truth for canonical URLs and structured data.
 
-import { SITE, FAQS, SERVICES, PROJECTS, SERVICE_AREAS } from "@/lib/site";
+import { SITE, FAQS, SERVICES, PROJECTS, SERVICE_AREAS, type Service } from "@/lib/site";
+import type { City } from "@/lib/locations";
 
 export const SITE_URL = "https://pssteels.in";
 export const OG_IMAGE = `${SITE_URL}/og-image.jpg`; // place /public/og-image.jpg
@@ -129,3 +130,53 @@ export function organizationLd() {
     ],
   };
 }
+
+// ---------- City + service builders ----------
+
+export function cityBusinessLd(city: City) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `${SITE_URL}/kerala/${city.slug}#business`,
+    name: `${SITE.name} — ${city.name}`,
+    image: OG_IMAGE,
+    url: `${SITE_URL}/kerala/${city.slug}`,
+    telephone: SITE.phoneTel,
+    email: SITE.email,
+    priceRange: "₹₹",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: SITE.address.line1,
+      addressLocality: "Mannarkkad",
+      addressRegion: "Kerala",
+      postalCode: SITE.address.postal,
+      addressCountry: "IN",
+    },
+    areaServed: { "@type": "City", name: city.name, containedInPlace: { "@type": "AdministrativeArea", name: `${city.district}, Kerala` } },
+    openingHoursSpecification: [{
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      opens: "08:30", closes: "19:30",
+    }],
+  };
+}
+
+export function serviceLd(service: Service, city?: City) {
+  const where = city ? `${city.name}, Kerala` : "Kerala";
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: service.title,
+    name: city ? `${service.title} in ${city.name}` : service.title,
+    description: service.short,
+    provider: { "@id": `${SITE_URL}/#business` },
+    areaServed: city
+      ? { "@type": "City", name: city.name }
+      : { "@type": "State", name: "Kerala" },
+    url: city
+      ? `${SITE_URL}/kerala/${city.slug}/${service.id}`
+      : `${SITE_URL}/services/${service.id}`,
+    offers: { "@type": "Offer", priceSpecification: { "@type": "PriceSpecification", priceCurrency: "INR" }, areaServed: where },
+  };
+}
+
