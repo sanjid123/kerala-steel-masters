@@ -65,19 +65,28 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="font-display font-semibold text-sm mb-4 text-white">Top Locations</h3>
+          <h3 className="font-display font-semibold text-sm mb-4 text-white">Service Locations</h3>
           <ul className="space-y-2 text-sm text-white/70">
-            {PRIORITY_CITIES.map((c) => (
+            {PRIORITY_CITIES.slice(0, 6).map((c) => (
               <li key={c.slug}>
                 <Link
                   to="/kerala/$city"
                   params={{ city: c.slug }}
-                  className="hover:text-orange transition"
+                  className="hover:text-orange transition inline-flex items-center gap-1.5"
                 >
-                  Steel Fabrication in {c.name}
+                  <MapPin className="h-3 w-3 text-orange/70" /> {c.name}
                 </Link>
               </li>
             ))}
+            <li className="pt-1">
+              <Link
+                to="/"
+                hash="service-areas"
+                className="text-orange hover:text-orange/80 font-semibold inline-flex items-center gap-1"
+              >
+                + all Kerala towns →
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -101,23 +110,32 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Full Kerala chip cloud — every town is an indexable internal link */}
-      <div className="border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
-          <h3 className="font-display font-semibold text-sm mb-4 text-white">All Service Areas in Kerala</h3>
-          <div className="flex flex-wrap gap-1.5">
-            {CITIES.map((c) => (
-              <Link
-                key={c.slug}
-                to="/kerala/$city"
-                params={{ city: c.slug }}
-                className="inline-flex items-center rounded-full bg-white/5 hover:bg-orange hover:text-orange-foreground border border-white/10 px-2.5 py-1 text-[11px] sm:text-xs text-white/60 transition"
-              >
-                {c.name}
-              </Link>
-            ))}
-          </div>
+      {/* Coverage band — all city links remain crawlable via sr-only nav */}
+      <div className="border-t border-white/10 bg-white/[0.02]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row gap-3 items-center justify-between text-sm">
+          <p className="text-white/70 inline-flex items-center gap-2">
+            <MapPin className="h-4 w-4 text-orange shrink-0" />
+            Services all over Kerala — serving all 14 districts from Kasaragod to Thiruvananthapuram.
+          </p>
+          <Link
+            to="/"
+            hash="service-areas"
+            className="text-orange hover:text-orange/80 font-semibold text-sm inline-flex items-center gap-1"
+          >
+            Find your area →
+          </Link>
         </div>
+        <nav aria-label="All Kerala service areas" className="sr-only">
+          <ul>
+            {CITIES.map((c) => (
+              <li key={c.slug}>
+                <Link to="/kerala/$city" params={{ city: c.slug }}>
+                  Steel Fabrication in {c.name}, {c.district}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
 
       <div className="border-t border-white/10">
