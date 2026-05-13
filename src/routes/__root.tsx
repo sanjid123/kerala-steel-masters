@@ -63,8 +63,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "PS Steels & Engineering | SS, MS Steel Fabrication, Mannarkkad Kerala" },
-      { name: "description", content: SITE.description },
+      { title: "PS Steels — SS & MS Fabrication in Kerala" },
+      { name: "description", content: "Custom SS, MS, GP pipe fabrication across Kerala. Handrails, gates, hotel & bakery counters. Free site visit and quote." },
       { name: "author", content: SITE.name },
       { name: "theme-color", content: "#0b1f3a" },
       { property: "og:site_name", content: SITE.name },
@@ -94,11 +94,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     scripts: [
       {
         src: "https://www.googletagmanager.com/gtag/js?id=G-5K1XY0PN8V",
-        async: true,
+        defer: true,
       },
       {
         children:
-          "window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-5K1XY0PN8V');",
+          "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());var _c=function(){gtag('config','G-5K1XY0PN8V')};if('requestIdleCallback' in window){requestIdleCallback(_c)}else{setTimeout(_c,1500)}",
       },
       { type: "application/ld+json", children: JSON.stringify(organizationLd()) },
     ],
