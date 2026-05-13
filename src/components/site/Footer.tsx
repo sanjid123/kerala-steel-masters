@@ -80,11 +80,10 @@ export function Footer() {
             ))}
             <li className="pt-1">
               <Link
-                to="/"
-                hash="service-areas"
+                to="/service-areas"
                 className="text-orange hover:text-orange/80 font-semibold inline-flex items-center gap-1"
               >
-                + all Kerala towns →
+                All Kerala →
               </Link>
             </li>
           </ul>
