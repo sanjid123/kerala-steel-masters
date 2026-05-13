@@ -7,7 +7,7 @@ import {
 import heroImg from "@/assets/hero-workshop.jpg";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { CtaBand } from "@/components/site/CtaBand";
-import { TestimonialMarquee } from "@/components/site/TestimonialMarquee";
+import { TestimonialStack } from "@/components/site/TestimonialStack";
 import { PROJECTS, SERVICES, SITE, waLink } from "@/lib/site";
 import { CITIES, PRIORITY_CITIES } from "@/lib/locations";
 import { ServiceAreaExplorer } from "@/components/site/ServiceAreaExplorer";
@@ -237,7 +237,7 @@ function Home() {
           />
         </div>
         <div className="mt-12">
-          <TestimonialMarquee />
+          <TestimonialStack />
         </div>
       </section>
 
