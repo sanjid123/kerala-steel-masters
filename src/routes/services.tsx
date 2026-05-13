@@ -11,6 +11,7 @@ import {
 
 import { CtaBand } from "@/components/site/CtaBand";
 import { SectionHeading } from "@/components/site/SectionHeading";
+import { ServiceAreaExplorer } from "@/components/site/ServiceAreaExplorer";
 import handrail from "@/assets/project-handrail.jpg";
 import gate from "@/assets/project-gate.jpg";
 import hotel from "@/assets/project-hotel-kitchen.jpg";
