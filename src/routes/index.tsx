@@ -9,7 +9,7 @@ import { SectionHeading } from "@/components/site/SectionHeading";
 import { CtaBand } from "@/components/site/CtaBand";
 import { TestimonialMarquee } from "@/components/site/TestimonialMarquee";
 import { PROJECTS, SERVICES, SITE, waLink } from "@/lib/site";
-import { CITIES, PRIORITY_CITIES } from "@/lib/locations";
+import { CITIES } from "@/lib/locations";
 import { ServiceAreaExplorer } from "@/components/site/ServiceAreaExplorer";
 import { canonical, faqLd, localBusinessLd, OG_IMAGE, absUrl } from "@/lib/seo";
 
