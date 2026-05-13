@@ -11,7 +11,7 @@ function Card({ t }: { t: (typeof TESTIMONIALS)[number] }) {
       </div>
       <p className="text-sm text-foreground/80 leading-relaxed line-clamp-5">"{t.quote}"</p>
       <div className="mt-5 flex items-center gap-3 pt-4 border-t border-border">
-        <img src={t.avatar} alt={t.name} loading="lazy" width={48} height={48} className="h-12 w-12 rounded-full object-cover" />
+        <img src={t.avatar} alt={t.name} loading="lazy" decoding="async" width={48} height={48} className="h-12 w-12 rounded-full object-cover" />
         <div>
           <div className="font-semibold text-sm text-navy">{t.name}</div>
           <div className="text-xs text-muted-foreground">{t.work} · {t.location}</div>

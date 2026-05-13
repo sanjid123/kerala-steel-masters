@@ -118,7 +118,7 @@ export function organizationLd() {
     "@type": "Organization",
     name: SITE.name,
     url: SITE_URL,
-    logo: OG_IMAGE,
+    logo: `${SITE_URL}/ps-steels-logo.png`,
     contactPoint: [
       {
         "@type": "ContactPoint",

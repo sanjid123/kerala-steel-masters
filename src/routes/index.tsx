@@ -9,7 +9,7 @@ import { SectionHeading } from "@/components/site/SectionHeading";
 import { CtaBand } from "@/components/site/CtaBand";
 import { TestimonialMarquee } from "@/components/site/TestimonialMarquee";
 import { PROJECTS, SERVICES, SITE, waLink } from "@/lib/site";
-import { CITIES, PRIORITY_CITIES } from "@/lib/locations";
+import { CITIES } from "@/lib/locations";
 import { ServiceAreaExplorer } from "@/components/site/ServiceAreaExplorer";
 import { canonical, faqLd, localBusinessLd, OG_IMAGE, absUrl } from "@/lib/seo";
 
@@ -73,6 +73,9 @@ function Home() {
           alt="Stainless steel handrail being welded in PS Steels workshop, Kerala"
           width={1920}
           height={1080}
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
           className="absolute inset-0 h-full w-full object-cover opacity-40"
         />
         <div className="absolute inset-0 bg-gradient-to-tr from-navy via-navy/85 to-navy/40" />
@@ -176,7 +179,7 @@ function Home() {
             {featured.map((p) => (
               <article key={p.id} className="group overflow-hidden rounded-2xl bg-card border border-border shadow-card">
                 <div className="aspect-[4/3] overflow-hidden">
-                  <img src={p.image} alt={p.title} loading="lazy" width={1024} height={768}
+                  <img src={p.image} alt={p.title} loading="lazy" decoding="async" width={1024} height={768}
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 </div>
                 <div className="p-5">
@@ -246,56 +249,18 @@ function Home() {
         </div>
       </section>
 
-      {/* SERVICE AREAS — pincode finder + internal links to per-city pages */}
-      <section id="service-areas" className="bg-muted/40 border-t border-border scroll-mt-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
-          <SectionHeading
-            eyebrow="Service areas"
-            title="Steel fabrication across all of Kerala"
-            description="Based in Vattambalam, Mannarkkad, we deliver and install across every major district in Kerala."
-          />
-
-          <div className="mt-10 grid gap-8 lg:grid-cols-5">
-            {/* Explorer (primary) */}
-            <div className="lg:col-span-3">
-              <ServiceAreaExplorer />
-            </div>
-
-            {/* Top cities (secondary) */}
-            <div className="lg:col-span-2">
-              <h3 className="font-display text-lg font-bold text-navy">Top cities we serve</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Quick links to our most-requested locations.
-              </p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {PRIORITY_CITIES.map((c) => (
-                  <Link
-                    key={c.slug}
-                    to="/kerala/$city"
-                    params={{ city: c.slug }}
-                    className="inline-flex items-center gap-1.5 rounded-full bg-card border border-border px-3 py-1.5 text-xs font-medium hover:border-steel hover:text-navy transition"
-                  >
-                    <MapPin className="h-3 w-3 text-steel" /> {c.name}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* SEO-only — every Kerala town remains crawlable */}
-          <nav aria-label="All Kerala service areas" className="sr-only">
-            <ul>
-              {CITIES.map((c) => (
-                <li key={c.slug}>
-                  <Link to="/kerala/$city" params={{ city: c.slug }}>
-                    Steel Fabrication in {c.name}, {c.district}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-      </section>
+      {/* SEO-only — every Kerala town remains crawlable */}
+      <nav aria-label="All Kerala service areas" className="sr-only">
+        <ul>
+          {CITIES.map((c) => (
+            <li key={c.slug}>
+              <Link to="/kerala/$city" params={{ city: c.slug }}>
+                Steel Fabrication in {c.name}, {c.district}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
       <CtaBand />
     </>

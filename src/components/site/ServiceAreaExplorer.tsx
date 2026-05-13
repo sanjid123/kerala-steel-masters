@@ -79,10 +79,6 @@ export function ServiceAreaExplorer() {
       <h3 className="mt-3 font-display text-2xl sm:text-3xl font-bold">
         Find steel fabrication services near you
       </h3>
-      <p className="mt-1.5 text-sm text-white/70">
-        Enter your 6-digit pincode or your town name. We serve all 5,000+
-        Kerala locations.
-      </p>
 
       <form
         onSubmit={handleSubmit}
