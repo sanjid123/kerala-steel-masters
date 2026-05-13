@@ -14,6 +14,8 @@ import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as KeralaCityRouteImport } from './routes/kerala.$city'
+import { Route as KeralaCityServiceRouteImport } from './routes/kerala.$city.$service'
 
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
@@ -40,6 +42,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KeralaCityRoute = KeralaCityRouteImport.update({
+  id: '/kerala/$city',
+  path: '/kerala/$city',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KeralaCityServiceRoute = KeralaCityServiceRouteImport.update({
+  id: '/$service',
+  path: '/$service',
+  getParentRoute: () => KeralaCityRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +59,8 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
+  '/kerala/$city': typeof KeralaCityRouteWithChildren
+  '/kerala/$city/$service': typeof KeralaCityServiceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +68,8 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
+  '/kerala/$city': typeof KeralaCityRouteWithChildren
+  '/kerala/$city/$service': typeof KeralaCityServiceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +78,37 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
+  '/kerala/$city': typeof KeralaCityRouteWithChildren
+  '/kerala/$city/$service': typeof KeralaCityServiceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/contact' | '/projects' | '/services'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/projects'
+    | '/services'
+    | '/kerala/$city'
+    | '/kerala/$city/$service'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/projects' | '/services'
-  id: '__root__' | '/' | '/about' | '/contact' | '/projects' | '/services'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/projects'
+    | '/services'
+    | '/kerala/$city'
+    | '/kerala/$city/$service'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/projects'
+    | '/services'
+    | '/kerala/$city'
+    | '/kerala/$city/$service'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +117,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   ProjectsRoute: typeof ProjectsRoute
   ServicesRoute: typeof ServicesRoute
+  KeralaCityRoute: typeof KeralaCityRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -116,8 +157,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/kerala/$city': {
+      id: '/kerala/$city'
+      path: '/kerala/$city'
+      fullPath: '/kerala/$city'
+      preLoaderRoute: typeof KeralaCityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kerala/$city/$service': {
+      id: '/kerala/$city/$service'
+      path: '/$service'
+      fullPath: '/kerala/$city/$service'
+      preLoaderRoute: typeof KeralaCityServiceRouteImport
+      parentRoute: typeof KeralaCityRoute
+    }
   }
 }
+
+interface KeralaCityRouteChildren {
+  KeralaCityServiceRoute: typeof KeralaCityServiceRoute
+}
+
+const KeralaCityRouteChildren: KeralaCityRouteChildren = {
+  KeralaCityServiceRoute: KeralaCityServiceRoute,
+}
+
+const KeralaCityRouteWithChildren = KeralaCityRoute._addFileChildren(
+  KeralaCityRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -125,7 +192,18 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ProjectsRoute: ProjectsRoute,
   ServicesRoute: ServicesRoute,
+  KeralaCityRoute: KeralaCityRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
