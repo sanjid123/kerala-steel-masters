@@ -67,7 +67,6 @@ const PAGES = [
 const isBuild = process.env.NODE_ENV === "production";
 
 export default defineConfig({
-  cloudflare: isBuild ? false : undefined,
   tanstackStart: {
     pages: PAGES,
     prerender: isBuild
