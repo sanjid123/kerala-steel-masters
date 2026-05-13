@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { zodValidator, fallback } from "@tanstack/zod-adapter";
-import { z } from "zod";
 import { ServiceAreaExplorer } from "@/components/site/ServiceAreaExplorer";
 import {
   ErrorState, FoundResult, LoadingState, OutsideKerala,
@@ -9,12 +7,10 @@ import {
 import { lookupPincode, searchPincodes, type PincodeLookupResult } from "@/lib/pincodes";
 import { canonical } from "@/lib/seo";
 
-const searchSchema = z.object({
-  q: fallback(z.string(), "").default(""),
-});
-
 export const Route = createFileRoute("/service-areas")({
-  validateSearch: zodValidator(searchSchema),
+  validateSearch: (input: Record<string, unknown>): { q: string } => ({
+    q: typeof input.q === "string" ? input.q : "",
+  }),
   head: () => ({
     meta: [
       { title: "Service Areas — PS Steels" },
