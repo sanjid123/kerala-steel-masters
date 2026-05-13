@@ -21,7 +21,7 @@ export function ServiceAreaExplorer() {
   const [highlight, setHighlight] = useState(0);
   const [status, setStatus] = useState<Status>("idle");
   const [result, setResult] = useState<PincodeLookupResult | null>(null);
-  const wrapRef = useRef<HTMLDivElement>(null);
+  const wrapRef = useRef<HTMLFormElement>(null);
 
   // Debounced suggestions.
   const [suggestions, setSuggestions] = useState<PincodeRecord[]>([]);
