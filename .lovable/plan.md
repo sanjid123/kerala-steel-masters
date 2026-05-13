@@ -1,56 +1,37 @@
 ## Goal
 
-Rebuild the "What Clients Say" section to match the uploaded reference: a vertical arc of avatars on the left (active one enlarged in the center) + the active testimonial quote on the right. Auto-rotates, click/hover to focus.
+Refine `TestimonialArc` to match the uploaded reference more faithfully. The current build shows 5 items and prev/next controls; the reference shows only 3 (prev, active, next) on a clean vertical curved line, with a calmer right-hand quote.
 
-## Reference layout (from video)
+## Changes to `src/components/site/TestimonialArc.tsx`
 
-```
- ┌──────────────────────────────────────────────────────┐
- │  ── Section eyebrow                                   │
- │  Customer Reviews                                     │
- │                                                       │
- │    ◯  Name (small)                                    │
- │       ★ rating · location                             │
- │                          ❝                            │
- │   ◉◉  NAME (large, bold)     They have awesome        │
- │       ★ rating · location    customer service…        │
- │                              — quote in serif italic  │
- │    ◯  Name (small)                                    │
- │       ★ rating · location                             │
- └──────────────────────────────────────────────────────┘
-```
+### Left column (arc list)
+- Show only **3 visible items** at a time: previous, active, next (instead of 5).
+- Replace the background dashed SVG with a **single vertical curved line** that actually threads through the three avatars:
+  - SVG sits absolutely behind the list, full height of the column.
+  - Path: gentle bezier that bulges right at the active row, e.g. `M 40 0 C 40 50%, 90 50%, 40 100%` so the curve passes through the indented active avatar.
+  - `stroke-navy/20`, `stroke-width:1`, no dashes — solid hairline.
+- Indent direction reversed to match reference: **active pushes right (toward the quote)**, neighbours sit further left.
+  - active: `translateX(48px)`, neighbour: `translateX(0)`.
+- Sizes: active avatar `72px`, neighbours `44px`.
+- Active row: name `text-lg font-bold text-navy`, neighbours `text-sm font-medium text-navy/80`.
+- Microcopy under name: green star + `4.9` + muted `· {work} · {location}` (single line, truncate). Drop the row of 5 stars — reference shows one star + score.
 
-Avatars sit on a faint curved guide line (subtle SVG arc). The middle/active avatar is ~1.6× larger. Above and below it, two neighbours are smaller and slightly indented along the arc. Switching active item slides the arc up/down so the new active is always centered.
+### Right column (quote)
+- Remove prev/next buttons and the `1 / N` counter. Auto-rotate + click on left avatars is enough; reference has no controls.
+- Keep large serif italic quote and the oversized `“` glyph.
+- Tighten attribution to one muted line: `— {name}, {location}`.
+- Keep `aria-live="polite"` and crossfade on change.
 
-## New component `src/components/site/TestimonialArc.tsx`
+### Behaviour
+- Auto-advance every 4.5s, pause on hover/focus (unchanged).
+- Clicking a neighbour avatar makes it active (unchanged).
+- Keyboard arrow nav stays for a11y, but no visible buttons.
+- Honour `prefers-reduced-motion` (unchanged).
 
-- Props: none (reads from `TESTIMONIALS` in `src/lib/site.ts`).
-- State: `activeIndex` (number), `paused` (bool).
-- Auto-advance every 4.5s (`setInterval`); pauses on hover/focus within the section.
-- Two columns on `md+`:
-  - Left (`md:col-span-5`): arc list. Renders 5 visible items — `[active-2, active-1, active, active+1, active+2]` (modular). Each item is an avatar + name + rating row.
-    - Position offsets along arc using inline `transform: translateX(...)` based on distance from center: `|d|=0` → 0px, `|d|=1` → 24px, `|d|=2` → 60px (creates the curved indent).
-    - Sizes: active `h-16 w-16` + `text-lg font-bold`; neighbours `h-10 w-10` + `text-sm`; outer `h-9 w-9 opacity-60`.
-    - Subtle SVG arc behind avatars (`stroke-border`, dashed) connecting them visually.
-    - Click / focus an item → set as active.
-    - `transition-all duration-500 ease-out`.
-  - Right (`md:col-span-7`): big serif italic quote with a large `❝` glyph, then attribution (work · location). Crossfade on change (`key={activeIndex}` + `animate-fade-in`).
-- Mobile (`< md`): single column. Arc collapses to a horizontal centered row of 5 avatars on top; quote below. Same active/neighbour sizing logic.
-- Accessibility:
-  - Container has `aria-roledescription="carousel"` and `aria-live="polite"` on the quote region.
-  - Each avatar button is a real `<button>` with `aria-label="Show testimonial from {name}"` and `aria-pressed={active}`.
-  - Prev/Next buttons (small, bottom-right of quote) for keyboard users; `←/→` arrow keys also navigate when section is focused.
-- Honour `prefers-reduced-motion`: skip auto-advance and use opacity-only transitions.
-
-## Edit `src/routes/index.tsx`
-
-- Swap `<TestimonialStack />` for `<TestimonialArc />`. Keep the existing `SectionHeading` and section wrapper.
-
-## Cleanup
-
-- Delete `src/components/site/TestimonialStack.tsx` (no longer used).
+### Mobile (`< md`)
+- Stack vertically: the 3-item arc on top (curve still visible), quote below.
+- Reduce active avatar to `64px`, neighbour to `40px`, indent to `28px`.
 
 ## Out of scope
-
-- No changes to `TESTIMONIALS` data shape, names, avatars, or quotes.
-- No changes to other sections, theme tokens, or routing.
+- No data changes (`TESTIMONIALS` stays as-is).
+- No changes to surrounding section heading, theme tokens, or other components.
