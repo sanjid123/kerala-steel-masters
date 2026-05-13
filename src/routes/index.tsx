@@ -8,7 +8,8 @@ import heroImg from "@/assets/hero-workshop.jpg";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { CtaBand } from "@/components/site/CtaBand";
 import { TestimonialMarquee } from "@/components/site/TestimonialMarquee";
-import { PROJECTS, SERVICE_AREAS, SERVICES, SITE, waLink } from "@/lib/site";
+import { PROJECTS, SERVICES, SITE, waLink } from "@/lib/site";
+import { CITIES, PRIORITY_CITIES } from "@/lib/locations";
 import { canonical, faqLd, localBusinessLd, OG_IMAGE, absUrl } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
@@ -239,7 +240,7 @@ function Home() {
         </div>
       </section>
 
-      {/* SERVICE AREAS */}
+      {/* SERVICE AREAS — internal links to per-city pages */}
       <section className="bg-muted/40 border-t border-border">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
           <SectionHeading
@@ -247,11 +248,32 @@ function Home() {
             title="Steel fabrication across all of Kerala"
             description="Based in Vattambalam, Mannarkkad, we deliver and install across every major district in Kerala."
           />
-          <div className="mt-8 flex flex-wrap gap-2">
-            {SERVICE_AREAS.map((c) => (
-              <span key={c} className="inline-flex items-center gap-1.5 rounded-full bg-card border border-border px-3.5 py-1.5 text-xs sm:text-sm text-foreground/80">
-                <MapPin className="h-3 w-3 text-steel" /> {c}
-              </span>
+
+          <h3 className="mt-10 font-display text-lg font-bold text-navy">Top cities we serve</h3>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {PRIORITY_CITIES.map((c) => (
+              <Link
+                key={c.slug}
+                to="/kerala/$city"
+                params={{ city: c.slug }}
+                className="inline-flex items-center gap-1.5 rounded-full bg-card border border-border px-3.5 py-1.5 text-sm font-medium hover:border-steel hover:text-navy transition"
+              >
+                <MapPin className="h-3 w-3 text-steel" /> Steel Fabrication in {c.name}
+              </Link>
+            ))}
+          </div>
+
+          <h3 className="mt-10 font-display text-lg font-bold text-navy">All Kerala towns we cover</h3>
+          <div className="mt-4 flex flex-wrap gap-1.5">
+            {CITIES.map((c) => (
+              <Link
+                key={c.slug}
+                to="/kerala/$city"
+                params={{ city: c.slug }}
+                className="rounded-full bg-card border border-border px-2.5 py-1 text-xs text-foreground/75 hover:border-steel hover:text-navy transition"
+              >
+                {c.name}
+              </Link>
             ))}
           </div>
         </div>
