@@ -57,10 +57,9 @@ import { canonical, faqLd, servicesLd, breadcrumbLd, absUrl, OG_IMAGE } from "@/
 
 export const Route = createFileRoute("/services")({
   head: () => {
-    const title =
-      "Steel Fabrication Services Kerala — SS, MS & GP Pipe Works | PS Steels";
+    const title = "Steel Fabrication Services in Kerala — PS Steels";
     const description =
-      "GP pipe works, SS & MS fabrication, handrails, gates, hotel & bakery counters, catering counters, wedding stage steel and custom fabrication across Kerala. Free site visit & quote.";
+      "SS, MS, GP pipe & steel pipe works across Kerala — handrails, gates, hotel & bakery counters, catering counters, custom fabrication. Free quote.";
     return {
       meta: [
         { title },

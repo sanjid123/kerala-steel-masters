@@ -6,9 +6,9 @@ import { canonical, breadcrumbLd, absUrl, OG_IMAGE, SITE_URL } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
   head: () => {
-    const title = "Contact PS Steels — Steel Fabrication Quote Mannarkkad Kerala";
+    const title = "Contact PS Steels — Free Quote in Kerala";
     const description =
-      "Call +91 97475 10220 or WhatsApp PS Steels & Engineering for a free site visit and quotation across Kerala. Email info@pssteels.in. Mon–Sat, 8:30 AM–7:30 PM.";
+      "Call +91 97475 10220 or WhatsApp PS Steels for a free site visit and steel fabrication quote anywhere in Kerala. Mon–Sat, 8:30 AM–7:30 PM.";
     const contactLd = {
       "@context": "https://schema.org",
       "@type": "ContactPage",

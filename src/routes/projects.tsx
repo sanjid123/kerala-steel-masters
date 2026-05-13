@@ -8,9 +8,9 @@ import { canonical, projectsLd, breadcrumbLd, absUrl, OG_IMAGE } from "@/lib/seo
 
 export const Route = createFileRoute("/projects")({
   head: () => {
-    const title = "Steel Fabrication Projects in Kerala | PS Steels Portfolio";
+    const title = "Steel Fabrication Projects in Kerala — PS Steels";
     const description =
-      "Recent SS handrails, MS gates, hotel kitchens, bakery counters, catering counters, wedding stage works, steel furniture and pipe bending projects delivered across Kerala.";
+      "Recent SS handrails, MS gates, hotel kitchens, bakery counters, catering counters, wedding stage works and steel furniture across Kerala.";
     return {
       meta: [
         { title },

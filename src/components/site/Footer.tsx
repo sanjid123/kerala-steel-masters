@@ -1,8 +1,20 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, Phone, Instagram, Facebook, Globe, ShieldCheck } from "lucide-react";
-import { SERVICES, SERVICE_AREAS, SITE } from "@/lib/site";
+import { SERVICES, SITE } from "@/lib/site";
+import { CITIES, PRIORITY_CITIES } from "@/lib/locations";
 import logo from "@/assets/ps-steels-logo-light.png";
 
+// Top services with SEO-rich anchor text.
+const TOP_SERVICE_LINKS = [
+  { id: "ss-ms-fabrication", anchor: "SS Steel Fabrication Kerala" },
+  { id: "ss-ms-fabrication", anchor: "MS Steel Fabrication" },
+  { id: "gp-steel-pipe", anchor: "GP Pipe Works Kerala" },
+  { id: "gp-steel-pipe", anchor: "Steel Pipe Fabrication" },
+  { id: "handrail-staircase", anchor: "SS Handrail Works" },
+  { id: "gate-sitout", anchor: "Steel Gate Fabrication" },
+  { id: "hotel-bakery", anchor: "Hotel Kitchen Fabrication" },
+  { id: "catering-counter", anchor: "Catering Counter Fabrication" },
+];
 
 export function Footer() {
   return (
@@ -22,22 +34,29 @@ export function Footer() {
             Complete SS and MS steel fabrication, GP pipe and steel pipe works across Kerala. Free consultation, site visit and quotation.
           </p>
           <div className="flex gap-3 mt-5">
-            <a href={SITE.socials.instagram} aria-label="Instagram" target="_blank" rel="noreferrer" className="h-9 w-9 rounded-md bg-white/10 hover:bg-orange hover:text-orange-foreground flex items-center justify-center transition">
+            <a href={SITE.socials.instagram} aria-label="Instagram" target="_blank" rel="noreferrer" className="h-10 w-10 rounded-md bg-white/10 hover:bg-orange hover:text-orange-foreground flex items-center justify-center transition">
               <Instagram className="h-4 w-4" />
             </a>
-            <a href={SITE.socials.facebook} aria-label="Facebook" target="_blank" rel="noreferrer" className="h-9 w-9 rounded-md bg-white/10 hover:bg-orange hover:text-orange-foreground flex items-center justify-center transition">
+            <a href={SITE.socials.facebook} aria-label="Facebook" target="_blank" rel="noreferrer" className="h-10 w-10 rounded-md bg-white/10 hover:bg-orange hover:text-orange-foreground flex items-center justify-center transition">
               <Facebook className="h-4 w-4" />
             </a>
-            <a href={SITE.socials.google} aria-label="Google Business Profile" target="_blank" rel="noreferrer" className="h-9 w-9 rounded-md bg-white/10 hover:bg-orange hover:text-orange-foreground flex items-center justify-center transition">
+            <a href={SITE.socials.google} aria-label="Google Business Profile" target="_blank" rel="noreferrer" className="h-10 w-10 rounded-md bg-white/10 hover:bg-orange hover:text-orange-foreground flex items-center justify-center transition">
               <Globe className="h-4 w-4" />
             </a>
           </div>
         </div>
 
         <div>
-          <h3 className="font-display font-semibold text-sm mb-4 text-white">Services</h3>
+          <h3 className="font-display font-semibold text-sm mb-4 text-white">Top Services</h3>
           <ul className="space-y-2 text-sm text-white/70">
-            {SERVICES.slice(0, 7).map((s) => (
+            {TOP_SERVICE_LINKS.map((s, i) => (
+              <li key={i}>
+                <Link to="/services" hash={s.id} className="hover:text-orange transition">
+                  {s.anchor}
+                </Link>
+              </li>
+            ))}
+            {SERVICES.slice(8).map((s) => (
               <li key={s.id}>
                 <Link to="/services" hash={s.id} className="hover:text-orange transition">{s.title}</Link>
               </li>
@@ -46,10 +65,20 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="font-display font-semibold text-sm mb-4 text-white">Service Areas</h3>
-          <p className="text-xs text-white/60 leading-relaxed">
-            {SERVICE_AREAS.join(" · ")}
-          </p>
+          <h3 className="font-display font-semibold text-sm mb-4 text-white">Top Locations</h3>
+          <ul className="space-y-2 text-sm text-white/70">
+            {PRIORITY_CITIES.map((c) => (
+              <li key={c.slug}>
+                <Link
+                  to="/kerala/$city"
+                  params={{ city: c.slug }}
+                  className="hover:text-orange transition"
+                >
+                  Steel Fabrication in {c.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div>
@@ -69,6 +98,25 @@ export function Footer() {
             </li>
           </ul>
           <p className="mt-4 text-xs text-white/50">{SITE.hours}</p>
+        </div>
+      </div>
+
+      {/* Full Kerala chip cloud — every town is an indexable internal link */}
+      <div className="border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+          <h3 className="font-display font-semibold text-sm mb-4 text-white">All Service Areas in Kerala</h3>
+          <div className="flex flex-wrap gap-1.5">
+            {CITIES.map((c) => (
+              <Link
+                key={c.slug}
+                to="/kerala/$city"
+                params={{ city: c.slug }}
+                className="inline-flex items-center rounded-full bg-white/5 hover:bg-orange hover:text-orange-foreground border border-white/10 px-2.5 py-1 text-[11px] sm:text-xs text-white/60 transition"
+              >
+                {c.name}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
 
