@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight, MessageCircle, Phone, ShieldCheck, Truck, Wrench, MapPin,
-  Sparkles, FileText, Hammer, Factory,
+  Sparkles, FileText, Hammer, Factory, ChevronLeft, ChevronRight,
 } from "lucide-react";
 import heroImg from "@/assets/hero-workshop.jpg";
 import { SectionHeading } from "@/components/site/SectionHeading";
