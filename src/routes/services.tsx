@@ -11,6 +11,7 @@ import {
 
 import { CtaBand } from "@/components/site/CtaBand";
 import { SectionHeading } from "@/components/site/SectionHeading";
+import { ServiceAreaExplorer } from "@/components/site/ServiceAreaExplorer";
 import handrail from "@/assets/project-handrail.jpg";
 import gate from "@/assets/project-gate.jpg";
 import hotel from "@/assets/project-hotel-kitchen.jpg";
@@ -108,7 +109,14 @@ function ServicesPage() {
         </div>
       </section>
 
-      {/* SEO INTRO */}
+      {/* SERVICE AREA FINDER */}
+      <section className="bg-muted/40 border-b border-border">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-14">
+          <ServiceAreaExplorer />
+        </div>
+      </section>
+
+
       <section className="border-b border-border bg-card">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 grid lg:grid-cols-2 gap-8">
           <div>
