@@ -4,9 +4,9 @@ import { ArrowRight, MapPin, MessageCircle, Phone, CheckCircle2 } from "lucide-r
 import { CtaBand } from "@/components/site/CtaBand";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { SERVICES, SITE, waLink } from "@/lib/site";
-import { getCity, neighboursOf, CITIES } from "@/lib/locations";
+import { getCity, neighboursOf } from "@/lib/locations";
 import {
-  canonical, absUrl, OG_IMAGE, breadcrumbLd, cityBusinessLd, serviceLd,
+  canonical, absUrl, OG_IMAGE, breadcrumbLd, cityBusinessLd,
 } from "@/lib/seo";
 
 export const Route = createFileRoute("/kerala/$city")({
@@ -178,6 +178,3 @@ function CityPage() {
     </>
   );
 }
-
-// Allow generating params for typed Links elsewhere.
-export const _allCitySlugs = CITIES.map((c) => c.slug);

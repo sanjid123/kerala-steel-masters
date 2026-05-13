@@ -102,7 +102,7 @@ function CityServicePage() {
             Why choose PS Steels for {service.title.toLowerCase()} in {city.name}
           </h2>
           <ul className="mt-5 space-y-2.5">
-            {service.bullets.map((b) => (
+            {service.bullets.map((b: string) => (
               <li key={b} className="flex items-start gap-2 text-sm">
                 <CheckCircle2 className="h-4 w-4 text-steel mt-0.5 shrink-0" />
                 <span>{b}</span>
