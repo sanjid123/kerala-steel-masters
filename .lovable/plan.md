@@ -1,37 +1,62 @@
-## Goal
+# Adopt Builto-style Hero (Scoped to Hero Only)
 
-Refine `TestimonialArc` to match the uploaded reference more faithfully. The current build shows 5 items and prev/next controls; the reference shows only 3 (prev, active, next) on a clean vertical curved line, with a calmer right-hand quote.
+The reference hero on builto-demo/demo1 has a few distinctive moves we'll borrow, while keeping our navy/orange brand, our copy, and the rest of the homepage untouched.
 
-## Changes to `src/components/site/TestimonialArc.tsx`
+## What we're keeping from the reference
+- **Full-bleed photographic background** with a clean sky/site image (no heavy navy overlay washing it out).
+- **Small eyebrow line** with a dot/dash bullet ("LET US HELP YOU CREATE.").
+- **Oversized display word** as the visual anchor ("BUILDING"), with a **sliding white reveal mask** sweeping across the letters as a subtle hero animation.
+- **Right-bottom slider arrows** (decorative carousel cue) — we'll keep them as static prev/next buttons that rotate the display word through 3 brand keywords.
+- **Generous vertical breathing room** (~85vh) so the hero feels cinematic.
 
-### Left column (arc list)
-- Show only **3 visible items** at a time: previous, active, next (instead of 5).
-- Replace the background dashed SVG with a **single vertical curved line** that actually threads through the three avatars:
-  - SVG sits absolutely behind the list, full height of the column.
-  - Path: gentle bezier that bulges right at the active row, e.g. `M 40 0 C 40 50%, 90 50%, 40 100%` so the curve passes through the indented active avatar.
-  - `stroke-navy/20`, `stroke-width:1`, no dashes — solid hairline.
-- Indent direction reversed to match reference: **active pushes right (toward the quote)**, neighbours sit further left.
-  - active: `translateX(48px)`, neighbour: `translateX(0)`.
-- Sizes: active avatar `72px`, neighbours `44px`.
-- Active row: name `text-lg font-bold text-navy`, neighbours `text-sm font-medium text-navy/80`.
-- Microcopy under name: green star + `4.9` + muted `· {work} · {location}` (single line, truncate). Drop the row of 5 stars — reference shows one star + score.
+## What we're keeping from our current site
+- All copy facts (Mannarkkad, Kerala, SS/MS/GP, free consultation chips).
+- WhatsApp + Call CTAs exactly as today.
+- Brand tokens: `navy`, `orange`, `whatsapp`, `gradient-hero`. **No new colors.**
+- Header, MaterialsStrip, and every section below the hero are untouched.
 
-### Right column (quote)
-- Remove prev/next buttons and the `1 / N` counter. Auto-rotate + click on left avatars is enough; reference has no controls.
-- Keep large serif italic quote and the oversized `“` glyph.
-- Tighten attribution to one muted line: `— {name}, {location}`.
-- Keep `aria-live="polite"` and crossfade on change.
+## New hero structure
 
-### Behaviour
-- Auto-advance every 4.5s, pause on hover/focus (unchanged).
-- Clicking a neighbour avatar makes it active (unchanged).
-- Keyboard arrow nav stays for a11y, but no visible buttons.
-- Honour `prefers-reduced-motion` (unchanged).
+```text
+┌──────────────────────────────────────────────────────────────┐
+│  [photo bg + soft navy gradient on left 55%]                 │
+│                                                              │
+│  • LET US BUILD WITH YOU                                     │
+│                                                              │
+│  ╔══════════════════════════════════╗                        │
+│  ║  FABRICATING                     ║  ← oversized display   │
+│  ╚══════════════════════════════════╝     word w/ reveal mask│
+│   Steel · Pipe · Structure  (rotates)                        │
+│                                                              │
+│  Short supporting paragraph (existing copy, trimmed)         │
+│                                                              │
+│  [WhatsApp for Quote]  [Call 9876…]                          │
+│                                                              │
+│  • Free Consultation  • Free Site Visit  • Custom Quote      │
+│                                                              │
+│                                       ◀  ▶   01 / 03         │
+└──────────────────────────────────────────────────────────────┘
+```
 
-### Mobile (`< md`)
-- Stack vertically: the 3-item arc on top (curve still visible), quote below.
-- Reduce active avatar to `64px`, neighbour to `40px`, indent to `28px`.
+## Implementation details (technical)
+
+- Edit only the `{/* HERO */}` block in `src/routes/index.tsx` (lines 70–115). No other files change.
+- Replace the static `<h1>` with a two-line layout:
+  - Line 1: small eyebrow with orange dot.
+  - Line 2: `<span class="hero-bigword">{word}</span>` — `font-display`, `text-6xl sm:text-7xl lg:text-8xl`, tracking-tight.
+- **Reveal-mask animation** via Tailwind + a tiny keyframe added inline to `src/styles.css`:
+  - `@keyframes hero-sweep { 0% { background-position: -120% 0 } 100% { background-position: 220% 0 } }`
+  - Applied to `.hero-bigword` as a `linear-gradient(100deg, transparent 40%, hsl(0 0% 100% / .85) 50%, transparent 60%)` background-clip:text overlay; runs every 5s, respects `prefers-reduced-motion`.
+- **Word rotator**: local `useState` cycling through `["FABRICATING", "WELDING", "INSTALLING"]` every 4s; arrow buttons increment/decrement; counter shows `01 / 03`. Keyboard arrows + pause on hover.
+- Reduce dark overlay so the image reads more like the reference: gradient becomes `from-navy/85 via-navy/55 to-transparent` (left-anchored) instead of covering the whole frame.
+- Hero height: `min-h-[78vh] lg:min-h-[86vh]`, content vertically centered.
+- Keep CTAs and trust chips exactly as today, only repositioned inside the new flex column.
 
 ## Out of scope
-- No data changes (`TESTIMONIALS` stays as-is).
-- No changes to surrounding section heading, theme tokens, or other components.
+- No header/nav changes, no new fonts, no new color tokens.
+- No changes to MaterialsStrip, Process, Values, Projects, Testimonials, CTA band, Footer.
+- No new dependencies (animation is pure CSS).
+- No swap of the hero image asset (still `hero-workshop.jpg`).
+
+## Risk
+Very low — change is confined to one JSX block plus ~6 lines of CSS keyframes. Fallback (no JS) still renders a static oversized word and all CTAs.
