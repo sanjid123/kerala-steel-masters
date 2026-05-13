@@ -10,6 +10,7 @@ import { CtaBand } from "@/components/site/CtaBand";
 import { TestimonialMarquee } from "@/components/site/TestimonialMarquee";
 import { PROJECTS, SERVICES, SITE, waLink } from "@/lib/site";
 import { CITIES, PRIORITY_CITIES } from "@/lib/locations";
+import { ServiceAreaExplorer } from "@/components/site/ServiceAreaExplorer";
 import { canonical, faqLd, localBusinessLd, OG_IMAGE, absUrl } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
@@ -240,8 +241,8 @@ function Home() {
         </div>
       </section>
 
-      {/* SERVICE AREAS — internal links to per-city pages */}
-      <section className="bg-muted/40 border-t border-border">
+      {/* SERVICE AREAS — pincode finder + internal links to per-city pages */}
+      <section id="service-areas" className="bg-muted/40 border-t border-border scroll-mt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
           <SectionHeading
             eyebrow="Service areas"
@@ -249,33 +250,45 @@ function Home() {
             description="Based in Vattambalam, Mannarkkad, we deliver and install across every major district in Kerala."
           />
 
-          <h3 className="mt-10 font-display text-lg font-bold text-navy">Top cities we serve</h3>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {PRIORITY_CITIES.map((c) => (
-              <Link
-                key={c.slug}
-                to="/kerala/$city"
-                params={{ city: c.slug }}
-                className="inline-flex items-center gap-1.5 rounded-full bg-card border border-border px-3.5 py-1.5 text-sm font-medium hover:border-steel hover:text-navy transition"
-              >
-                <MapPin className="h-3 w-3 text-steel" /> Steel Fabrication in {c.name}
-              </Link>
-            ))}
+          <div className="mt-10 grid gap-8 lg:grid-cols-5">
+            {/* Explorer (primary) */}
+            <div className="lg:col-span-3">
+              <ServiceAreaExplorer />
+            </div>
+
+            {/* Top cities (secondary) */}
+            <div className="lg:col-span-2">
+              <h3 className="font-display text-lg font-bold text-navy">Top cities we serve</h3>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Quick links to our most-requested locations.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {PRIORITY_CITIES.map((c) => (
+                  <Link
+                    key={c.slug}
+                    to="/kerala/$city"
+                    params={{ city: c.slug }}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-card border border-border px-3 py-1.5 text-xs font-medium hover:border-steel hover:text-navy transition"
+                  >
+                    <MapPin className="h-3 w-3 text-steel" /> {c.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
 
-          <h3 className="mt-10 font-display text-lg font-bold text-navy">All Kerala towns we cover</h3>
-          <div className="mt-4 flex flex-wrap gap-1.5">
-            {CITIES.map((c) => (
-              <Link
-                key={c.slug}
-                to="/kerala/$city"
-                params={{ city: c.slug }}
-                className="rounded-full bg-card border border-border px-2.5 py-1 text-xs text-foreground/75 hover:border-steel hover:text-navy transition"
-              >
-                {c.name}
-              </Link>
-            ))}
-          </div>
+          {/* SEO-only — every Kerala town remains crawlable */}
+          <nav aria-label="All Kerala service areas" className="sr-only">
+            <ul>
+              {CITIES.map((c) => (
+                <li key={c.slug}>
+                  <Link to="/kerala/$city" params={{ city: c.slug }}>
+                    Steel Fabrication in {c.name}, {c.district}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
       </section>
 
