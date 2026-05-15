@@ -40,6 +40,7 @@ export const SITE = {
   phoneTel: "+919747510220",
   whatsappNumber: "919747510220",
   email: "info@pssteels.in",
+  emailSecondary: "pssteelsandengineering@gmail.com",
   hours: "Mon to Sat, 8:30 AM to 7:30 PM",
   socials: {
     google: "https://www.google.com/maps?q=Vattambalam+Mannarkkad",
