@@ -21,7 +21,7 @@ export const Route = createFileRoute("/contact")({
           "@type": "ContactPoint",
           telephone: SITE.phoneTel,
           contactType: "customer service",
-          email: SITE.email,
+          email: [SITE.email, SITE.emailSecondary],
           areaServed: "IN",
           availableLanguage: ["en", "ml", "hi"],
         },
@@ -96,6 +96,13 @@ function ContactPage() {
             <div>
               <div className="font-display font-bold text-navy">Email</div>
               <div className="text-sm text-muted-foreground">{SITE.email}</div>
+              <a
+                href={`mailto:${SITE.emailSecondary}`}
+                onClick={(e) => e.stopPropagation()}
+                className="mt-1 inline-block text-xs text-muted-foreground/80 hover:text-navy underline-offset-2 hover:underline"
+              >
+                {SITE.emailSecondary}
+              </a>
             </div>
           </a>
 

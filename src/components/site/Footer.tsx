@@ -99,7 +99,10 @@ export function Footer() {
               <a href={`tel:${SITE.phoneTel}`} className="hover:text-white">{SITE.phoneDisplay}</a>
             </li>
             <li className="flex gap-3"><Mail className="h-4 w-4 mt-0.5 shrink-0 text-orange" />
-              <a href={`mailto:${SITE.email}`} className="hover:text-white">{SITE.email}</a>
+              <div className="flex flex-col gap-0.5">
+                <a href={`mailto:${SITE.email}`} className="hover:text-white">{SITE.email}</a>
+                <a href={`mailto:${SITE.emailSecondary}`} className="text-xs text-white/55 hover:text-white">{SITE.emailSecondary}</a>
+              </div>
             </li>
             <li className="flex gap-3"><ShieldCheck className="h-4 w-4 mt-0.5 shrink-0 text-orange" />
               <span>GSTIN: <span className="text-white font-medium tracking-wide">{SITE.gstin}</span></span>

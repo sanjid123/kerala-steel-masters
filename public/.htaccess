@@ -4,6 +4,8 @@
 # ----------------------------------------------------------------------
 # 1. Force HTTPS + non-www (canonical: https://pssteels.in)
 # ----------------------------------------------------------------------
+DirectoryIndex index.html
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
