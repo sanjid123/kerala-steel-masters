@@ -92,7 +92,7 @@ export function ServiceAreaExplorer() {
             inputMode="text"
             autoComplete="off"
             maxLength={60}
-            placeholder="e.g. 678582 or Mannarkkad"
+            placeholder="Enter your Pincode"
             value={query}
             onFocus={() => setOpen(true)}
             onChange={(e) => {

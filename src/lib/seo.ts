@@ -128,6 +128,7 @@ export function organizationLd() {
         availableLanguage: ["en", "ml", "hi"],
       },
     ],
+    sameAs: [SITE.socials.instagram, SITE.socials.facebook, SITE.googleBusinessProfile].filter(Boolean),
   };
 }
 
