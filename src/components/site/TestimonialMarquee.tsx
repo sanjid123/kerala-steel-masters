@@ -26,12 +26,12 @@ export function TestimonialMarquee() {
   const row2 = TESTIMONIALS.slice(4);
   return (
     <div className="space-y-5 marquee-pause">
-      <div className="overflow-hidden relative" style={{ maskImage: "linear-gradient(90deg, transparent, black 6%, black 94%, transparent)" }}>
+      <div className="marquee-mask overflow-hidden relative">
         <div className="marquee-track">
           {[...row1, ...row1].map((t, i) => <Card key={`a-${i}`} t={t} />)}
         </div>
       </div>
-      <div className="overflow-hidden relative" style={{ maskImage: "linear-gradient(90deg, transparent, black 6%, black 94%, transparent)" }}>
+      <div className="marquee-mask overflow-hidden relative">
         <div className="marquee-track-reverse">
           {[...row2, ...row2].map((t, i) => <Card key={`b-${i}`} t={t} />)}
         </div>
