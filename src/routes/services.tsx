@@ -11,34 +11,35 @@ import {
 
 import { CtaBand } from "@/components/site/CtaBand";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import handrail from "@/assets/project-handrail.jpg";
-import gate from "@/assets/project-gate.jpg";
-import hotel from "@/assets/project-hotel-kitchen.jpg";
-import bakery from "@/assets/project-bakery.jpg";
-import catering from "@/assets/project-catering.jpg";
-import wedding from "@/assets/project-wedding.jpg";
-import furniture from "@/assets/project-furniture.jpg";
-import pipe from "@/assets/project-pipe-bending.jpg";
-import gpPipe from "@/assets/project-gp-pipe.jpg";
-import balcony from "@/assets/project-balcony.jpg";
-import sitout from "@/assets/project-sitout.jpg";
-import mainGate from "@/assets/project-main-gate.jpg";
+import ssMs from "@/assets/service-ss-ms.jpg.asset.json";
+import gpPipe from "@/assets/service-gp-pipe.jpg.asset.json";
+import handrail from "@/assets/service-handrail.jpg.asset.json";
+import gate from "@/assets/service-gate.jpg.asset.json";
+import sitout from "@/assets/service-sitout.jpg.asset.json";
+import hotel from "@/assets/service-hotel.jpg.asset.json";
+import catering from "@/assets/service-catering.jpg.asset.json";
+import events from "@/assets/service-events.jpg.asset.json";
+import marriage from "@/assets/service-marriage.jpg.asset.json";
+import bending from "@/assets/service-bending.jpg.asset.json";
+import furniture from "@/assets/service-furniture.jpg.asset.json";
+import custom from "@/assets/service-custom.jpg.asset.json";
 
 const IMAGES: Record<string, string> = {
-  "ss-ms-fabrication": handrail,
-  "gp-steel-pipe": gpPipe,
-  "handrail-staircase": balcony,
-  "gate-sitout": gate,
-  "hotel-bakery": hotel,
-  "catering-counter": catering,
-  "events-decoration": wedding,
-  "marriage-decoration": wedding,
-  "sheet-pipe-bending": pipe,
-  "steel-furniture": furniture,
-  "custom-fabrication": mainGate,
+  "ss-ms-fabrication": ssMs.url,
+  "gp-steel-pipe": gpPipe.url,
+  "handrail-staircase": handrail.url,
+  "gate-sitout": gate.url,
+  "hotel-bakery": hotel.url,
+  "catering-counter": catering.url,
+  "events-decoration": events.url,
+  "marriage-decoration": marriage.url,
+  "sheet-pipe-bending": bending.url,
+  "steel-furniture": furniture.url,
+  "custom-fabrication": custom.url,
 };
-IMAGES["bakery"] = bakery;
-IMAGES["sitout"] = sitout;
+// Keep sitout import referenced for future split into a dedicated service.
+void sitout;
+
 
 // City pools per service for SEO depth
 const CITY_POOL = [
@@ -135,7 +136,7 @@ function ServicesPage() {
               className={`grid lg:grid-cols-2 gap-10 items-center scroll-mt-24 ${reverse ? "lg:[&>*:first-child]:order-2" : ""}`}
             >
               <div className="overflow-hidden rounded-3xl shadow-card aspect-[4/3]">
-                <img src={IMAGES[s.id] ?? handrail} alt={`${s.title} in Kerala by PS Steels`} loading="lazy" decoding="async" width={1024} height={768} className="h-full w-full object-cover" />
+                <img src={IMAGES[s.id] ?? handrail.url} alt={`${s.title} in Kerala by PS Steels`} loading="lazy" decoding="async" width={1024} height={768} className="h-full w-full object-cover" />
               </div>
               <div>
                 <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-steel">
